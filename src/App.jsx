@@ -6,10 +6,13 @@ import materialGuides from './data/materialGuides.json';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { BrandStory } from './components/BrandStory';
+import { ExploreMaterials } from './components/ExploreMaterials';
+import { FeaturedCollection } from './components/FeaturedCollection';
 import { Collections } from './components/Collections';
 import { ProductModal } from './components/ProductModal';
 import { StoneVisualizer } from './components/StoneVisualizer';
 import { ApplicationGallery } from './components/ApplicationGallery';
+import { MaterialStory } from './components/MaterialStory';
 import { WhyChooseKanha } from './components/WhyChooseKanha';
 import { StoneAnalysis } from './components/StoneAnalysis';
 import { MaterialGuide } from './components/MaterialGuide';
@@ -18,8 +21,8 @@ import { AdminDashboard } from './components/AdminDashboard';
 import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 
-const STORAGE_KEY_PRODUCTS = 'kanha_products_v1';
-const STORAGE_KEY_ENQUIRIES = 'kanha_enquiries_v1';
+const STORAGE_KEY_PRODUCTS = 'kanha_products_v2';
+const STORAGE_KEY_ENQUIRIES = 'kanha_enquiries_v2';
 
 export function App() {
   // Load products with localStorage fallback
@@ -28,7 +31,7 @@ export function App() {
       const saved = localStorage.getItem(STORAGE_KEY_PRODUCTS);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length >= 70) return parsed;
       }
     } catch (e) {
       console.warn('Could not load products from localStorage, using initial catalogue.', e);
@@ -54,8 +57,9 @@ export function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [adminOpen, setAdminOpen] = useState(false);
   const [visualizerConfig, setVisualizerConfig] = useState(null);
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('All');
 
-  // Direct connection from catalogue to visualizer (Section 7)
+  // Direct connection from catalogue / cards to visualizer
   const handleVisualizeStone = (product, application) => {
     let targetRoom = 'kitchen';
     if (product.category === 'Marble') targetRoom = 'living-room';
@@ -85,6 +89,12 @@ export function App() {
     handleNavigate('visualizer');
   };
 
+  // Jump to collections filtered by category
+  const handleSelectMaterialCategory = (category) => {
+    setSelectedCategoryFilter(category);
+    handleNavigate('collections');
+  };
+
   // Update localStorage when products change
   const handleUpdateProducts = (updated) => {
     setProducts(updated);
@@ -97,7 +107,7 @@ export function App() {
 
   // Reset products to default initial JSON
   const handleResetProducts = () => {
-    if (window.confirm('Reset catalogue to original sample products?')) {
+    if (window.confirm('Reset catalogue to original 70 verified products?')) {
       setProducts(initialProducts);
       try {
         localStorage.removeItem(STORAGE_KEY_PRODUCTS);
@@ -140,14 +150,18 @@ export function App() {
     const sections = [
       'home',
       'about',
+      'materials',
+      'featured',
       'collections',
       'visualizer',
       'applications',
+      'material-story',
       'why-choose-us',
       'stone-analysis',
       'material-guide',
       'contact'
     ];
+
     const handleScroll = () => {
       const scrollPos = window.scrollY + 200;
       for (const sectionId of sections) {
@@ -176,58 +190,77 @@ export function App() {
         onOpenAdmin={() => setAdminOpen(true)}
       />
 
-      {/* Main Content Sections */}
+      {/* Main Architectural Journey Sections */}
       <main className="flex-1">
-        {/* 2. Hero Section */}
+        {/* Section 1: Hero Section with Interactive 3D Stone Slab */}
         <Hero
           onExploreCollections={() => handleNavigate('collections')}
           onOpenVisualizer={() => handleNavigate('visualizer')}
         />
 
-        {/* 3. Brand Story Editorial */}
-        <BrandStory />
+        {/* Section 2: Brand Story Editorial Narrative */}
+        <BrandStory
+          onExploreMaterials={() => handleNavigate('materials')}
+        />
 
-        {/* 4. Product Collections Catalogue */}
-        <Collections
+        {/* Section 3: Explore Materials (Granite, Marble, Tiles, Quartz) */}
+        <ExploreMaterials
+          onSelectCategory={handleSelectMaterialCategory}
+          onOpenVisualizer={() => handleNavigate('visualizer')}
+        />
+
+        {/* Section 4: Featured Stone Collection Showcase */}
+        <FeaturedCollection
           products={products}
           onSelectProduct={(product) => setSelectedProduct(product)}
           onVisualizeStone={handleVisualizeStone}
         />
 
-        {/* 5. Standout Photo-Based Interior Stone Visualizer */}
+        {/* Complete 70-Stone Architectural Catalogue with "Load More" Pagination */}
+        <Collections
+          products={products}
+          initialCategory={selectedCategoryFilter}
+          onSelectProduct={(product) => setSelectedProduct(product)}
+          onVisualizeStone={handleVisualizeStone}
+        />
+
+        {/* Section 6: Photo-Based Interior Room Stone Visualizer */}
         <StoneVisualizer
           products={products}
           preselectedConfig={visualizerConfig}
         />
 
-        {/* 6. Application Gallery */}
+        {/* Section 5: Stone in Architecture Application Gallery */}
         <ApplicationGallery
           galleryItems={galleryItems}
         />
 
-        {/* 7. Why Choose Kanha */}
+        {/* Section 7: Material Story — The Anatomy of Stone */}
+        <MaterialStory />
+
+        {/* Section 8: Why Choose Kanha */}
         <WhyChooseKanha />
 
-        {/* 8. Verified Stone Analysis & Engineering Benchmarks */}
+        {/* Engineering Benchmarks & Stone Density Analysis */}
         <StoneAnalysis />
 
-        {/* 9. Educational Material Guide */}
+        {/* Educational Architectural Material Guide */}
         <MaterialGuide
           guides={materialGuides}
         />
 
-        {/* 10. Contact Page with Verified Address, Map & Form */}
+        {/* Section 9: Contact Page with Verified Map & WhatsApp */}
         <ContactSection
           onSaveEnquiry={handleSaveEnquiry}
         />
       </main>
 
-      {/* 10. Minimal Luxury Footer */}
+      {/* Section 10: Luxury Architectural Footer */}
       <Footer
         onNavigate={handleNavigate}
       />
 
-      {/* 11. Floating WhatsApp Button */}
+      {/* Floating WhatsApp Action Button */}
       <FloatingWhatsApp />
 
       {/* Product Detail Modal */}

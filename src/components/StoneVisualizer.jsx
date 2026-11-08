@@ -183,10 +183,10 @@ export const StoneVisualizer = ({ products = [], preselectedConfig = null }) => 
               <span>Interactive Space Visualizer</span>
             </div>
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-charcoal font-normal tracking-tight">
-              Visualize in Real Space.
+              See Your Stone Before You Choose.
             </h2>
             <p className="text-sm sm:text-base text-charcoal/75 mt-3 leading-relaxed">
-              Experience genuine photographic before-and-after installations. Select an interior room, stone variety, and intended architectural surface.
+              Experience genuine photographic room comparisons. Select an interior space, material category, and stone variety to preview how natural textures interact with light, scale, and architectural finishes.
             </p>
           </div>
 

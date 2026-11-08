@@ -17,12 +17,13 @@ export const Navbar = ({ activeSection, onNavigate, onOpenAdmin }) => {
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'Story' },
+    { id: 'materials', label: 'Materials' },
     { id: 'collections', label: 'Collections' },
     { id: 'visualizer', label: 'Visualizer', highlight: true },
     { id: 'applications', label: 'Applications' },
+    { id: 'material-story', label: 'Anatomy' },
     { id: 'why-choose-us', label: 'Why Kanha' },
-    { id: 'stone-analysis', label: 'Stone Analysis' },
-    { id: 'contact', label: 'Contact & Map' },
+    { id: 'contact', label: 'Contact' },
   ];
 
   const handleNavClick = (id) => {

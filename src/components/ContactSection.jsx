@@ -98,7 +98,7 @@ export const ContactSection = ({ onSaveEnquiry }) => {
             <span>Showroom Location & Direct Enquiry</span>
           </p>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-charcoal font-normal tracking-tight">
-            Connect With Our Stone Specialists.
+            Let's Find the Right Stone for Your Space.
           </h2>
           <p className="text-sm sm:text-base text-charcoal/75 mt-3 leading-relaxed">
             Visit our physical slab displays in Marble Market, Shiroli, Kolhapur or submit your project details below to receive a personalized WhatsApp quotation.

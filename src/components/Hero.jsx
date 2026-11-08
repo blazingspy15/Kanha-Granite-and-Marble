@@ -1,104 +1,122 @@
 import React from 'react';
-import { ArrowRight, Compass, ShieldCheck, Sparkles, MapPin, Navigation, ExternalLink } from 'lucide-react';
+import { ArrowRight, Compass, MapPin, ChevronDown } from 'lucide-react';
+import { Stone3DCanvas } from './Stone3DCanvas';
 import { MAP_DIRECTIONS_URL, MAP_COORDINATES } from './ContactSection';
 
 export const Hero = ({ onExploreCollections, onOpenVisualizer }) => {
   return (
-    <section id="home" className="relative min-h-[92vh] sm:min-h-screen flex items-center pt-24 pb-16 overflow-hidden bg-ivory">
-      {/* High-Resolution Architectural Editorial Image */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=88"
-          alt="Luxury architectural kitchen with Calacatta marble waterfall island and natural stone surfaces"
-          className="w-full h-full object-cover object-center filter brightness-[0.93] contrast-[1.03]"
-          loading="eager"
-        />
-        {/* Subtle Luxury Gradient Overlays in Warm Ivory & Sand */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ivory/95 via-ivory/85 to-ivory/30 lg:to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ivory via-transparent to-ivory/50" />
+    <section id="home" className="relative min-h-screen flex flex-col justify-between pt-24 pb-12 overflow-hidden bg-ivory">
+      {/* Background Architectural Ambient Tone */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-sand/30 blur-3xl"></div>
+        <div className="absolute top-1/3 -right-32 w-96 h-96 rounded-full bg-taupe/15 blur-3xl"></div>
+        <div className="absolute bottom-10 left-1/4 w-80 h-80 rounded-full bg-sand/20 blur-3xl"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="max-w-2xl lg:max-w-3xl">
-          {/* Architectural Eyebrow Tag with Verified Kolhapur Location */}
-          <div className="inline-flex items-center space-x-2 px-3 py-1.5 mb-6 bg-sand/80 backdrop-blur-md border border-taupe/30 rounded-xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-taupe"></span>
-            <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-semibold text-charcoal">
-              Marble Market, Shiroli · Kolhapur
-            </span>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* Left Column: Editorial Typography & CTAs (7 cols) */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            {/* Architectural Eyebrow Tag with Location */}
+            <div className="inline-flex items-center space-x-2.5 px-3.5 py-1.5 mb-6 bg-sand/60 backdrop-blur-sm border border-taupe/30 rounded-xs self-start">
+              <span className="w-1.5 h-1.5 rounded-full bg-taupe"></span>
+              <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.22em] font-semibold text-charcoal">
+                Marble Market, Shiroli · Kolhapur
+              </span>
+            </div>
+
+            {/* Main Editorial Headline */}
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-charcoal leading-[1.06] tracking-tight mb-6">
+              Nature Carved.{' '}
+              <span className="italic block font-normal text-taupe-dark">
+                Spaces Defined.
+              </span>
+            </h1>
+
+            {/* Supporting Text */}
+            <p className="text-base sm:text-lg md:text-xl text-charcoal/80 font-normal leading-relaxed max-w-xl mb-10 text-balance">
+              Discover premium granite, marble, tiles and quartz for timeless interiors.
+            </p>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-12">
+              <button
+                onClick={onExploreCollections}
+                className="px-8 py-4 bg-charcoal hover:bg-charcoal-deep text-ivory text-xs uppercase tracking-[0.2em] font-medium transition-all duration-300 flex items-center justify-center space-x-3 group shadow-subtle rounded-xs"
+              >
+                <span>Explore Collections</span>
+                <ArrowRight className="w-4 h-4 text-sand transition-transform group-hover:translate-x-1" />
+              </button>
+
+              <button
+                onClick={onOpenVisualizer}
+                className="px-8 py-4 bg-warmwhite/90 hover:bg-warmwhite backdrop-blur-sm text-charcoal border border-sand hover:border-taupe text-xs uppercase tracking-[0.2em] font-medium transition-all duration-300 flex items-center justify-center space-x-2.5 rounded-xs shadow-xs"
+              >
+                <Compass className="w-4 h-4 text-taupe" />
+                <span>Visualize Your Stone</span>
+              </button>
+            </div>
+
+            {/* Architectural Material Summary Highlights */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-sand/80 max-w-2xl">
+              <div>
+                <p className="font-heading text-2xl text-charcoal font-semibold">18</p>
+                <p className="text-[10px] text-softgrey uppercase tracking-wider mt-0.5">Granite Varieties</p>
+              </div>
+              <div>
+                <p className="font-heading text-2xl text-charcoal font-semibold">18</p>
+                <p className="text-[10px] text-softgrey uppercase tracking-wider mt-0.5">Marble Selections</p>
+              </div>
+              <div>
+                <p className="font-heading text-2xl text-charcoal font-semibold">18</p>
+                <p className="text-[10px] text-softgrey uppercase tracking-wider mt-0.5">Vitrified Tiles</p>
+              </div>
+              <div>
+                <p className="font-heading text-2xl text-charcoal font-semibold">16</p>
+                <p className="text-[10px] text-softgrey uppercase tracking-wider mt-0.5">Quartz Surfaces</p>
+              </div>
+            </div>
           </div>
 
-          {/* Main Headline with Editorial Serif Hierarchy */}
-          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-charcoal leading-[1.08] tracking-tight mb-6">
-            Nature’s Finest.{' '}
-            <span className="italic block font-normal text-taupe-dark">
-              Crafted for Your Spaces.
-            </span>
-          </h1>
-
-          {/* Subheading */}
-          <p className="text-base sm:text-lg md:text-xl text-charcoal/80 font-normal leading-relaxed max-w-xl mb-10 text-balance">
-            Explore an exquisite collection of granite, marble, tiles and quartz surfaces designed to bring timeless beauty to every space.
-          </p>
-
-          {/* Action CTAs */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-12 sm:mb-14">
-            <button
-              onClick={onExploreCollections}
-              className="px-7 sm:px-8 py-3.5 sm:py-4 bg-charcoal hover:bg-charcoal-deep text-ivory text-xs uppercase tracking-[0.2em] font-medium transition-all duration-300 flex items-center justify-center space-x-3 group shadow-subtle rounded-xs"
-            >
-              <span>Explore Collections</span>
-              <ArrowRight className="w-4 h-4 text-sand transition-transform group-hover:translate-x-1" />
-            </button>
-
-            <button
-              onClick={onOpenVisualizer}
-              className="px-7 sm:px-8 py-3.5 sm:py-4 bg-warmwhite/90 hover:bg-warmwhite backdrop-blur-sm text-charcoal border border-sand hover:border-taupe text-xs uppercase tracking-[0.2em] font-medium transition-all duration-300 flex items-center justify-center space-x-2.5 rounded-xs shadow-xs"
-            >
-              <Compass className="w-4 h-4 text-taupe" />
-              <span>Interactive Stone Visualizer</span>
-            </button>
-          </div>
-
-          {/* Luxury Curated Highlights Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-sand/80 max-w-2xl">
-            <div>
-              <p className="font-heading text-xl sm:text-2xl text-charcoal font-semibold">Granite</p>
-              <p className="text-[10px] sm:text-[11px] text-softgrey uppercase tracking-wider mt-0.5">Igneous Slabs</p>
-            </div>
-            <div>
-              <p className="font-heading text-xl sm:text-2xl text-charcoal font-semibold">Marble</p>
-              <p className="text-[10px] sm:text-[11px] text-softgrey uppercase tracking-wider mt-0.5">Indian & Imported</p>
-            </div>
-            <div>
-              <p className="font-heading text-xl sm:text-2xl text-charcoal font-semibold">Tiles</p>
-              <p className="text-[10px] sm:text-[11px] text-softgrey uppercase tracking-wider mt-0.5">Vitrified Slabs</p>
-            </div>
-            <div>
-              <p className="font-heading text-xl sm:text-2xl text-charcoal font-semibold">Quartz</p>
-              <p className="text-[10px] sm:text-[11px] text-softgrey uppercase tracking-wider mt-0.5">Engineered Surfaces</p>
+          {/* Right Column: 3D Interactive Floating Stone Slab (5 cols) */}
+          <div className="lg:col-span-5 relative flex items-center justify-center">
+            <div className="w-full max-w-lg relative">
+              {/* Subtle architectural backdrop halo */}
+              <div className="absolute inset-0 rounded-full bg-sand/40 filter blur-2xl transform scale-90 -z-10 pointer-events-none"></div>
+              <Stone3DCanvas />
             </div>
           </div>
+
         </div>
       </div>
 
-      {/* Verified Location Floating Badge at Bottom Right */}
-      <div className="hidden xl:flex absolute bottom-8 right-8 z-10 items-center space-x-3 bg-warmwhite/95 backdrop-blur-md px-4 py-2.5 border border-sand rounded-xs text-[11px] text-charcoal shadow-subtle">
-        <MapPin className="w-4 h-4 text-taupe shrink-0" />
-        <div>
-          <span className="font-semibold block">Sangli Patha, Marble Market, Shiroli</span>
-          <span className="text-[10px] text-softgrey font-mono block">GPS: {MAP_COORDINATES.display}</span>
+      {/* Bottom Bar: Location Coordinates & Smooth Scroll Indicator */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between pt-4 border-t border-sand/40 text-xs text-softgrey">
+        <div className="flex items-center space-x-2">
+          <MapPin className="w-3.5 h-3.5 text-taupe shrink-0" />
+          <span className="hidden sm:inline">Sangli Patha, Marble Market, Shiroli ·</span>
+          <span className="font-mono text-[10px]">{MAP_COORDINATES.display}</span>
+          <a
+            href={MAP_DIRECTIONS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-taupe-dark hover:underline ml-1 font-medium"
+          >
+            Directions →
+          </a>
         </div>
-        <a
-          href={MAP_DIRECTIONS_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ml-2 px-2.5 py-1 bg-sand/50 hover:bg-sand text-charcoal text-[10px] uppercase tracking-wider font-semibold rounded-xs transition-colors"
-          title="Open driving route in Google Maps"
+
+        <button
+          onClick={onExploreCollections}
+          className="flex items-center space-x-1.5 hover:text-charcoal transition-colors group cursor-pointer"
         >
-          Directions
-        </a>
+          <span className="text-[10px] uppercase tracking-[0.2em] font-medium">Scroll to explore</span>
+          <ChevronDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />
+        </button>
       </div>
     </section>
   );
 };
+
+export default Hero;

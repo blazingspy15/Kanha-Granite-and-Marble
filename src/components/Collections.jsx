@@ -3,13 +3,43 @@ import { Search, Filter, MessageCircle, Eye, ArrowUpRight, Sparkles, Compass, Ch
 import { buildWhatsAppUrl, createProductEnquiryMessage } from '../utils/whatsapp';
 import { getAssetUrl } from '../utils/imageHelper';
 
-export const Collections = ({ products = [], onSelectProduct, onVisualizeStone }) => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+export const Collections = ({
+  products = [],
+  initialCategory = 'All',
+  onSelectProduct,
+  onVisualizeStone
+}) => {
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [selectedFinish, setSelectedFinish] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('featured');
+  const [visibleCount, setVisibleCount] = useState(12);
+
+  // Sync when initialCategory changes externally
+  React.useEffect(() => {
+    if (initialCategory) {
+      setSelectedCategory(initialCategory);
+      setVisibleCount(12);
+    }
+  }, [initialCategory]);
 
   const categories = ['All', 'Granite', 'Marble', 'Tiles', 'Quartz'];
+
+  // Reset pagination when filters change
+  const handleCategoryChange = (cat) => {
+    setSelectedCategory(cat);
+    setVisibleCount(12);
+  };
+
+  const handleFinishChange = (finish) => {
+    setSelectedFinish(finish);
+    setVisibleCount(12);
+  };
+
+  const handleSearchChange = (query) => {
+    setSearchQuery(query);
+    setVisibleCount(12);
+  };
 
   // Extract unique finishes across all products
   const allFinishes = useMemo(() => {
@@ -87,7 +117,7 @@ export const Collections = ({ products = [], onSelectProduct, onVisualizeStone }
             {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setSelectedCategory(cat)}
+                onClick={() => handleCategoryChange(cat)}
                 className={`px-4 py-2 text-xs uppercase tracking-wider transition-all duration-200 rounded-xs font-medium ${
                   selectedCategory === cat
                     ? 'bg-charcoal text-ivory shadow-xs'
@@ -107,7 +137,7 @@ export const Collections = ({ products = [], onSelectProduct, onVisualizeStone }
               <input
                 type="text"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
                 placeholder="Search stone name, tone or application..."
                 className="w-full pl-9 pr-3 py-2 text-xs bg-warmwhite border border-sand focus:border-taupe focus:outline-none rounded-xs placeholder:text-softgrey/70 text-charcoal"
               />
@@ -118,7 +148,7 @@ export const Collections = ({ products = [], onSelectProduct, onVisualizeStone }
               <Filter className="w-4 h-4 text-softgrey shrink-0" />
               <select
                 value={selectedFinish}
-                onChange={(e) => setSelectedFinish(e.target.value)}
+                onChange={(e) => handleFinishChange(e.target.value)}
                 className="w-full py-2 px-3 text-xs bg-warmwhite border border-sand focus:border-taupe focus:outline-none rounded-xs text-charcoal font-medium"
               >
                 <option value="All">All Surface Finishes</option>
@@ -185,8 +215,9 @@ export const Collections = ({ products = [], onSelectProduct, onVisualizeStone }
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProducts.map((product) => {
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProducts.slice(0, visibleCount).map((product) => {
               const defaultApp = product.applications?.[0] || 'General Application';
               const whatsappUrl = buildWhatsAppUrl(
                 createProductEnquiryMessage({
@@ -336,7 +367,31 @@ export const Collections = ({ products = [], onSelectProduct, onVisualizeStone }
               );
             })}
           </div>
-        )}
+
+          {/* Load More Pagination */}
+          {filteredProducts.length > visibleCount && (
+            <div className="mt-14 text-center space-y-4">
+              <p className="text-xs text-softgrey">
+                Showing <strong className="text-charcoal font-semibold">{Math.min(visibleCount, filteredProducts.length)}</strong> of <strong className="text-charcoal font-semibold">{filteredProducts.length}</strong> stone varieties
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <button
+                  onClick={() => setVisibleCount((prev) => Math.min(prev + 12, filteredProducts.length))}
+                  className="px-8 py-3.5 bg-charcoal hover:bg-charcoal-deep text-ivory text-xs uppercase tracking-[0.2em] font-medium transition-all duration-300 rounded-xs shadow-xs"
+                >
+                  Load More Stones (+12)
+                </button>
+                <button
+                  onClick={() => setVisibleCount(filteredProducts.length)}
+                  className="px-6 py-3.5 bg-warmwhite hover:bg-sand/40 border border-sand text-charcoal text-xs uppercase tracking-[0.2em] font-semibold transition-all duration-300 rounded-xs"
+                >
+                  Show All {filteredProducts.length} Stones
+                </button>
+              </div>
+            </div>
+          )}
+        </>
+      )}
       </div>
     </section>
   );
