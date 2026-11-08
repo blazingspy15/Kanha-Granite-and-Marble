@@ -97,6 +97,21 @@ export const PREVIEW_MANIFEST = {
     caption: 'Monolithic Black Galaxy Granite island anchor reflecting overhead pendant lighting.',
     finish: 'Mirror Polished 20mm',
   },
+  'kitchen__marble-indian-statuario__island': {
+    afterImage: 'images/visualizer/kitchen/kitchen-marble-calacatta-island.jpg',
+    caption: 'Indian Statuario Marble waterfall kitchen island with dramatic bookmatched veining and matching backsplash.',
+    finish: 'Bookmatch Polished 20mm Mitered Edge',
+  },
+  'kitchen__marble-italian-carrara__island': {
+    afterImage: 'images/visualizer/kitchen/kitchen-marble-calacatta-island.jpg',
+    caption: 'Italian Carrara Marble waterfall island with subtle smoky veins and elegant gold fixtures.',
+    finish: 'Polished 20mm Waterfall Gable',
+  },
+  'kitchen__quartz-calacatta-gold__island': {
+    afterImage: 'images/visualizer/kitchen/kitchen-marble-calacatta-island.jpg',
+    caption: 'Calacatta Gold Engineered Quartz island featuring bold grey and warm golden mineral veining.',
+    finish: 'Silky Polished 20mm Non-Porous',
+  },
   'kitchen__quartz-calacatta-style__island': {
     afterImage: 'images/visualizer/kitchen/kitchen-quartz-calacatta-island.jpg',
     caption: 'Calacatta-Style Quartz waterfall island featuring dramatic grey veining.',
@@ -119,12 +134,27 @@ export const PREVIEW_MANIFEST = {
     caption: 'Warm Mediterranean Botticino beige marble adding gentle, golden-toned serenity.',
     finish: 'Silky Honed Satin',
   },
+  'living-room__tiles-glossy-vitrified__flooring': {
+    afterImage: 'images/visualizer/living-room/living-marble-statuario-flooring.jpg',
+    caption: 'Glossy vitrified large-format tiles delivering seamless marble-look expanses.',
+    finish: 'Nano Polished Rectified Edge',
+  },
 
   // === BATHROOM ===
   'bathroom__marble-italian-carrara__vanity': {
     afterImage: 'images/visualizer/bathroom/bathroom-marble-carrara-vanity.jpg',
     caption: 'Understated Italian Carrara Marble vanity counter with soft smoky grey veining.',
     finish: 'Honed Matte 18mm',
+  },
+  'bathroom__marble-botticino__wall': {
+    afterImage: 'images/visualizer/bathroom/bathroom-marble-travertine-wall.jpg',
+    caption: 'Warm beige Botticino marble wall cladding and flooring with frameless shower and freestanding tub.',
+    finish: 'Honed Satin Anti-Moisture',
+  },
+  'bathroom__marble-travertine-beige__wall': {
+    afterImage: 'images/visualizer/bathroom/bathroom-marble-travertine-wall.jpg',
+    caption: 'Travertine Beige marble wall surfaces paired with ambient LED perimeter backlighting.',
+    finish: 'Filled & Honed Architectural Matte',
   },
   'bathroom__tiles-large-format__wall': {
     afterImage: 'images/visualizer/bathroom/bathroom-tiles-large-format-wall.jpg',
@@ -137,6 +167,16 @@ export const PREVIEW_MANIFEST = {
     afterImage: 'images/visualizer/staircase/staircase-granite-black-galaxy-steps.jpg',
     caption: 'High-durability Black Galaxy Granite step treads with anti-slip nosing details.',
     finish: 'Honed Anti-Slip Tread',
+  },
+  'staircase__marble-indian-statuario__steps': {
+    afterImage: 'images/visualizer/staircase/staircase-marble-statuario-steps.jpg',
+    caption: 'Floating architectural Statuario marble staircase with matching bookmatched feature wall.',
+    finish: 'Calibrated 30mm Solid Tread',
+  },
+  'staircase__marble-italian-carrara__steps': {
+    afterImage: 'images/visualizer/staircase/staircase-marble-statuario-steps.jpg',
+    caption: 'Continuous Carrara marble steps with minimalist glass balustrade.',
+    finish: 'Honed & Chamfered 30mm',
   },
 
   // === BEDROOM ===

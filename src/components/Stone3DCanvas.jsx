@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { getAssetUrl } from '../utils/imageHelper';
+
+// Register GSAP plugin safely
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const SLAB_TEXTURES = [
   {
@@ -9,7 +16,7 @@ const SLAB_TEXTURES = [
     category: 'Italian Marble',
     texture: 'images/textures/marble/italian-carrara-texture.jpg',
     color: '#E8E8E6',
-    roughness: 0.18,
+    roughness: 0.16,
     metalness: 0.05
   },
   {
@@ -19,7 +26,7 @@ const SLAB_TEXTURES = [
     texture: 'images/textures/granite/black-galaxy-texture.jpg',
     color: '#161616',
     roughness: 0.12,
-    metalness: 0.15
+    metalness: 0.18
   },
   {
     id: 'calacatta-gold',
@@ -36,7 +43,7 @@ const SLAB_TEXTURES = [
     category: 'Natural Granite',
     texture: 'images/textures/granite/alaska-white-texture.jpg',
     color: '#ECEBE6',
-    roughness: 0.22,
+    roughness: 0.20,
     metalness: 0.05
   }
 ];
@@ -50,7 +57,7 @@ export const Stone3DCanvas = ({ className = '' }) => {
   activeTextureRef.current = activeTextureIndex;
 
   useEffect(() => {
-    // Check WebGL availability
+    // 1. WebGL Support Verification
     const checkWebGL = () => {
       try {
         const canvas = document.createElement('canvas');
@@ -72,14 +79,14 @@ export const Stone3DCanvas = ({ className = '' }) => {
     let width = container.clientWidth || 400;
     let height = container.clientHeight || 500;
 
-    // Check reduced motion preference
+    // Respect reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Three.js Scene, Camera, Renderer
+    // 2. Three.js Scene, Camera, High-Precision Renderer
     const scene = new THREE.Scene();
 
-    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
-    camera.position.set(0, 0, 5.2);
+    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
+    camera.position.set(0, 0, 5.4);
 
     let renderer;
     try {
@@ -91,7 +98,7 @@ export const Stone3DCanvas = ({ className = '' }) => {
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       renderer.setSize(width, height);
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.15;
+      renderer.toneMappingExposure = 1.18;
       container.appendChild(renderer.domElement);
     } catch (e) {
       console.warn('WebGL init failed:', e);
@@ -100,30 +107,30 @@ export const Stone3DCanvas = ({ className = '' }) => {
       return;
     }
 
-    // Lighting Setup for Architectural Stone Sheen
+    // 3. Architectural Lighting Rig (Simulates natural high-end showroom daylighting)
     const ambientLight = new THREE.AmbientLight(0xfdfbf7, 1.4);
     scene.add(ambientLight);
 
-    // Warm Key Light (mimics showroom downlight)
-    const keyLight = new THREE.DirectionalLight(0xfff7ed, 2.2);
-    keyLight.position.set(4, 5, 4);
+    // Warm Key Light (mimics ceiling flood downlight)
+    const keyLight = new THREE.DirectionalLight(0xfff8ee, 2.4);
+    keyLight.position.set(4.5, 5.5, 4.0);
     scene.add(keyLight);
 
-    // Soft Rim Light (highlights slab bevels)
-    const rimLight = new THREE.DirectionalLight(0xdce7f2, 1.3);
-    rimLight.position.set(-4, -2, -3);
+    // Soft Rim Light (catches bevel edge specular reflections)
+    const rimLight = new THREE.DirectionalLight(0xdde8f4, 1.4);
+    rimLight.position.set(-4.5, -2.5, -3.0);
     scene.add(rimLight);
 
-    // Bottom Fill Light
-    const fillLight = new THREE.DirectionalLight(0xe8ddcc, 0.8);
+    // Subtle Ground Fill (warm travertine bounce)
+    const fillLight = new THREE.DirectionalLight(0xe8ddcc, 0.9);
     fillLight.position.set(0, -4, 2);
     scene.add(fillLight);
 
-    // Create Architectural Stone Slab Geometry
-    // Width: 2.2m, Height: 3.2m (authentic stone slab ratio ~1:1.45), Depth: 0.08m
-    const slabGeometry = new THREE.BoxGeometry(2.3, 3.2, 0.08, 2, 2, 2);
+    // 4. Architectural Stone Slab Geometry & Chamfered Edges
+    // Proportions: 2.3m x 3.25m x 0.08m (authentic large-format jumbo slab)
+    const slabGeometry = new THREE.BoxGeometry(2.35, 3.25, 0.08, 2, 2, 2);
 
-    // Texture Loader
+    // Texture Loader with Cache
     const textureLoader = new THREE.TextureLoader();
     const loadedTextures = new Map();
 
@@ -144,7 +151,7 @@ export const Stone3DCanvas = ({ className = '' }) => {
           },
           undefined,
           () => {
-            // Procedural fallback if image fails to load
+            // Procedural fallback canvas if network texture fails
             const canvas = document.createElement('canvas');
             canvas.width = 512;
             canvas.height = 512;
@@ -165,7 +172,7 @@ export const Stone3DCanvas = ({ className = '' }) => {
       });
     };
 
-    // Material with physical reflection & sheen
+    // Physically-based material with polished stone sheen
     const slabMaterial = new THREE.MeshStandardMaterial({
       color: 0xffffff,
       roughness: 0.16,
@@ -173,14 +180,19 @@ export const Stone3DCanvas = ({ className = '' }) => {
     });
 
     const slabMesh = new THREE.Mesh(slabGeometry, slabMaterial);
-    // Slight initial tilt for architectural perspective
+    // Initial architectural angle
     slabMesh.rotation.x = 0.12;
     slabMesh.rotation.y = -0.32;
     scene.add(slabMesh);
 
-    // Subtle edge highlight frame
+    // Fine chamfer wireframe edge highlight
     const edgesGeom = new THREE.EdgesGeometry(slabGeometry);
-    const edgesMat = new THREE.LineBasicMaterial({ color: 0xd6cbb8, linewidth: 1, transparent: true, opacity: 0.45 });
+    const edgesMat = new THREE.LineBasicMaterial({
+      color: 0xd6cbb8,
+      linewidth: 1,
+      transparent: true,
+      opacity: 0.4
+    });
     const edgesLine = new THREE.LineSegments(edgesGeom, edgesMat);
     slabMesh.add(edgesLine);
 
@@ -192,12 +204,25 @@ export const Stone3DCanvas = ({ className = '' }) => {
       setIsLoading(false);
     });
 
-    // Interaction & Animation State
+    // 5. GSAP ScrollTrigger Integration
+    let scrollProgress = 0;
+    let scrollTriggerInstance = null;
+
+    if (!prefersReducedMotion) {
+      scrollTriggerInstance = ScrollTrigger.create({
+        trigger: '#home',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1.2,
+        onUpdate: (self) => {
+          scrollProgress = self.progress;
+        }
+      });
+    }
+
+    // Interactive Mouse Tracking State
     let mouseX = 0;
     let mouseY = 0;
-    let targetRotationX = 0.12;
-    let targetRotationY = -0.32;
-    let scrollYOffset = 0;
     let isVisible = true;
 
     const handleMouseMove = (e) => {
@@ -205,20 +230,13 @@ export const Stone3DCanvas = ({ className = '' }) => {
       const rect = container.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
-      mouseX = x * 0.55;
-      mouseY = y * 0.35;
+      mouseX = x * 0.45;
+      mouseY = y * 0.3;
     };
 
-    const handleScroll = () => {
-      if (prefersReducedMotion) return;
-      const scrollPos = window.scrollY;
-      scrollYOffset = (scrollPos / window.innerHeight) * 1.2;
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
     container.addEventListener('mousemove', handleMouseMove, { passive: true });
 
-    // Visibility observer to pause loop when not on screen
+    // IntersectionObserver to pause render loops when offscreen
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -229,7 +247,7 @@ export const Stone3DCanvas = ({ className = '' }) => {
     );
     observer.observe(container);
 
-    // Resize Handler
+    // Responsive Canvas Resize Handler
     const handleResize = () => {
       if (!container) return;
       width = container.clientWidth;
@@ -240,7 +258,7 @@ export const Stone3DCanvas = ({ className = '' }) => {
     };
     window.addEventListener('resize', handleResize);
 
-    // Expose texture updater to React re-renders via ref
+    // Expose texture updater to React re-renders
     const updateMeshTexture = async (index) => {
       const cfg = SLAB_TEXTURES[index];
       if (!cfg) return;
@@ -253,9 +271,9 @@ export const Stone3DCanvas = ({ className = '' }) => {
 
     container._updateTexture = updateMeshTexture;
 
-    // Render loop with smooth lerp
+    // 6. Smooth Cinematic Animation Loop
     let animationFrameId;
-    let clock = new THREE.Clock();
+    const clock = new THREE.Clock();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
@@ -264,14 +282,20 @@ export const Stone3DCanvas = ({ className = '' }) => {
       const elapsedTime = clock.getElapsedTime();
 
       if (!prefersReducedMotion) {
-        // Floating motion + scroll rotation + mouse parallax
-        const floatOffset = Math.sin(elapsedTime * 0.9) * 0.05;
-        targetRotationY = -0.32 + mouseX + scrollYOffset * 0.8;
-        targetRotationX = 0.12 - mouseY + Math.sin(elapsedTime * 0.7) * 0.02;
+        // Floating wave animation
+        const floatOffset = Math.sin(elapsedTime * 0.85) * 0.04;
 
-        slabMesh.rotation.y += (targetRotationY - slabMesh.rotation.y) * 0.05;
-        slabMesh.rotation.x += (targetRotationX - slabMesh.rotation.x) * 0.05;
+        // Cinematic scroll rotation + mouse parallax
+        const targetRotationY = -0.32 + mouseX + scrollProgress * 1.1;
+        const targetRotationX = 0.12 - mouseY + Math.sin(elapsedTime * 0.65) * 0.02 + scrollProgress * 0.2;
+        const targetRotationZ = scrollProgress * 0.15;
+
+        // Smooth damping lerp (0.05 factor)
+        slabMesh.rotation.y += (targetRotationY - slabMesh.rotation.y) * 0.06;
+        slabMesh.rotation.x += (targetRotationX - slabMesh.rotation.x) * 0.06;
+        slabMesh.rotation.z += (targetRotationZ - slabMesh.rotation.z) * 0.06;
         slabMesh.position.y = floatOffset;
+        slabMesh.position.z = -scrollProgress * 0.4;
       }
 
       renderer.render(scene, camera);
@@ -281,7 +305,7 @@ export const Stone3DCanvas = ({ className = '' }) => {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('scroll', handleScroll);
+      if (scrollTriggerInstance) scrollTriggerInstance.kill();
       window.removeEventListener('resize', handleResize);
       container.removeEventListener('mousemove', handleMouseMove);
       observer.disconnect();
@@ -298,7 +322,7 @@ export const Stone3DCanvas = ({ className = '' }) => {
     };
   }, []);
 
-  // When active texture changes in React state, update 3D mesh
+  // Sync texture change from React state
   useEffect(() => {
     if (mountRef.current && mountRef.current._updateTexture) {
       mountRef.current._updateTexture(activeTextureIndex);
@@ -335,7 +359,7 @@ export const Stone3DCanvas = ({ className = '' }) => {
       <div
         ref={mountRef}
         className="w-full h-[420px] sm:h-[500px] lg:h-[580px] cursor-grab active:cursor-grabbing relative"
-        title="Interactive 3D Stone Slab · Move cursor to rotate"
+        title="Interactive 3D Architectural Stone Slab · Move cursor to tilt, scroll to rotate"
       >
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-ivory/50 backdrop-blur-xs">
@@ -366,7 +390,7 @@ export const Stone3DCanvas = ({ className = '' }) => {
 
       <div className="mt-3 text-center">
         <span className="text-[10px] uppercase tracking-[0.2em] text-softgrey font-medium">
-          3D Architectural Slab · Tilt & Scroll to Inspect Surface
+          3D Architectural Slab · Tilt & Scroll-Linked Rotation
         </span>
       </div>
     </div>

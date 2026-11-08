@@ -1,6 +1,7 @@
 import React from 'react';
-import { Layers, Compass, Building2, MessageSquare, Palette, Sparkles, MapPin } from 'lucide-react';
+import { Layers, Compass, Building2, MessageSquare, Palette, Sparkles, MapPin, Eye } from 'lucide-react';
 import { WHATSAPP_BASE_URL, WHATSAPP_DISPLAY } from '../utils/whatsapp';
+import { getAssetUrl } from '../utils/imageHelper';
 
 export const WhyChooseKanha = () => {
   const pillars = [
@@ -45,6 +46,7 @@ export const WhyChooseKanha = () => {
   return (
     <section id="why-choose-us" className="py-20 lg:py-28 bg-ivory border-b border-sand/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Section Header */}
         <div className="max-w-3xl mb-16 lg:mb-20">
           <p className="text-[11px] uppercase tracking-[0.25em] text-taupe font-semibold mb-3">
@@ -86,31 +88,54 @@ export const WhyChooseKanha = () => {
           })}
         </div>
 
-        {/* Showroom Invitation Banner */}
-        <div className="mt-14 p-8 bg-sand/30 border border-sand rounded-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-          <div className="space-y-1">
-            <div className="flex items-center space-x-2 text-taupe-dark text-xs uppercase tracking-wider font-semibold">
-              <MapPin className="w-4 h-4" />
-              <span>Showroom Experience at Shiroli</span>
+        {/* Showroom Physical Experience Banner with Authentic Gallery Photo */}
+        <div className="mt-16 bg-warmwhite border border-sand rounded-sm overflow-hidden shadow-subtle grid grid-cols-1 lg:grid-cols-12 items-stretch">
+          <div className="lg:col-span-5 relative aspect-[4/3] lg:aspect-auto overflow-hidden bg-sand/30">
+            <img
+              src={getAssetUrl('images/showroom/showroom-slab-gallery.jpg')}
+              alt="Kanha Granite and Marble physical showroom slab gallery displays in Shiroli"
+              className="w-full h-full object-cover filter brightness-[0.97]"
+              loading="lazy"
+            />
+            <div className="absolute top-3 left-3 bg-charcoal/90 backdrop-blur-sm text-sand text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-xs font-semibold">
+              Shiroli Slab Gallery
             </div>
-            <h4 className="font-heading text-2xl text-charcoal font-semibold">
-              Inspect Full Slabs in Person
-            </h4>
-            <p className="text-xs sm:text-sm text-charcoal/75 max-w-2xl">
-              Natural stone comes alive under natural lighting. We encourage you to walk our slab displays at Sangli Patha, Marble Market, Shiroli, Kolhapur to experience texture, veining, and surface feel firsthand.
-            </p>
           </div>
 
-          <a
-            href={WHATSAPP_BASE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3.5 bg-charcoal hover:bg-charcoal-deep text-ivory text-xs uppercase tracking-[0.2em] font-medium transition-colors shrink-0 rounded-xs shadow-subtle flex items-center space-x-2"
-          >
-            <span>Plan a Showroom Visit</span>
-          </a>
+          <div className="lg:col-span-7 p-8 lg:p-10 flex flex-col justify-between space-y-6">
+            <div className="space-y-3">
+              <div className="flex items-center space-x-2 text-taupe text-xs uppercase tracking-wider font-semibold">
+                <MapPin className="w-4 h-4" />
+                <span>Showroom Experience at Shiroli, Kolhapur</span>
+              </div>
+              <h4 className="font-heading text-2xl sm:text-3xl text-charcoal font-semibold">
+                Inspect Full Jumbo Slabs in Person
+              </h4>
+              <p className="text-xs sm:text-sm text-charcoal/75 leading-relaxed">
+                Natural stone comes alive under natural lighting. We encourage you to walk our extensive gallery displays at Sangli Patha, Marble Market, Shiroli to experience the authentic mineral depth, crystalline reflectivity, and tactile surface finishes firsthand before confirming your architectural order.
+              </p>
+            </div>
+
+            <div className="pt-4 border-t border-sand/60 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+              <div className="text-xs text-softgrey">
+                <span className="block font-medium text-charcoal">Visiting Hours: Mon – Sat 9:30 AM – 7:30 PM</span>
+                <span>Open for Architect & Client Consultations</span>
+              </div>
+              <a
+                href={WHATSAPP_BASE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3.5 bg-charcoal hover:bg-charcoal-deep text-ivory text-xs uppercase tracking-[0.2em] font-medium transition-colors shrink-0 rounded-xs shadow-subtle text-center"
+              >
+                Plan a Showroom Visit
+              </a>
+            </div>
+          </div>
         </div>
+
       </div>
     </section>
   );
 };
+
+export default WhyChooseKanha;

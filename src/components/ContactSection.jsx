@@ -29,7 +29,7 @@ export const MAP_DIRECTIONS_URL = 'https://www.google.com/maps/dir/?api=1&destin
 export const MAP_SHORT_URL = 'https://maps.app.goo.gl/kMwAcZoxJS654vDDA';
 export const MAP_PLACE_URL = 'https://www.google.com/maps/place/Kanha+granite+and+marble/@16.7349763,74.2913544,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc101007618e2ab:0x5f2af658c47de5f6!8m2!3d16.7349763!4d74.2913544!16s%2Fg%2F11xrzj0qtn';
 
-export const ContactSection = ({ onSaveEnquiry }) => {
+export const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',
@@ -41,7 +41,9 @@ export const ContactSection = ({ onSaveEnquiry }) => {
   });
 
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [isMapLoading, setIsMapLoading] = useState(true);
 
   const categories = ['Granite', 'Marble', 'Tiles', 'Quartz', 'Complete Home Package'];
@@ -58,7 +60,7 @@ export const ContactSection = ({ onSaveEnquiry }) => {
   const validate = () => {
     const errs = {};
     if (!formData.name.trim()) {
-      errs.name = 'Please provide your name';
+      errs.name = 'Please provide your full name';
     }
     const cleanPhone = formData.mobile.replace(/\D/g, '');
     if (!cleanPhone || cleanPhone.length < 10) {
@@ -68,24 +70,27 @@ export const ContactSection = ({ onSaveEnquiry }) => {
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
-    if (onSaveEnquiry) {
-      onSaveEnquiry({
-        ...formData,
-        id: `enq-${Date.now()}`,
-        timestamp: new Date().toISOString(),
-        status: 'New',
-      });
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      // Build structured enquiry message for WhatsApp direct transmission
+      const whatsappMessage = createContactFormEnquiryMessage(formData);
+      const url = buildWhatsAppUrl(whatsappMessage);
+
+      // Open official business WhatsApp
+      window.open(url, '_blank', 'noopener,noreferrer');
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Enquiry transmission error:', err);
+      setSubmitError('Unable to open WhatsApp automatically. Please use the direct WhatsApp button on the left.');
+    } finally {
+      setIsSubmitting(false);
     }
-
-    const whatsappMessage = createContactFormEnquiryMessage(formData);
-    const url = buildWhatsAppUrl(whatsappMessage);
-
-    window.open(url, '_blank', 'noopener,noreferrer');
-    setSubmitted(true);
   };
 
   return (
@@ -346,16 +351,23 @@ export const ContactSection = ({ onSaveEnquiry }) => {
                   ></textarea>
                 </div>
 
+                {submitError && (
+                  <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xs">
+                    {submitError}
+                  </div>
+                )}
+
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full py-3.5 bg-charcoal hover:bg-charcoal-deep text-ivory text-xs uppercase tracking-[0.2em] font-medium rounded-xs transition-all duration-200 flex items-center justify-center space-x-2 shadow-subtle group"
+                    disabled={isSubmitting}
+                    className="w-full py-3.5 bg-charcoal hover:bg-charcoal-deep disabled:opacity-60 text-ivory text-xs uppercase tracking-[0.2em] font-medium rounded-xs transition-all duration-200 flex items-center justify-center space-x-2 shadow-subtle group"
                   >
                     <MessageCircle className="w-4 h-4 text-sand transition-transform group-hover:scale-110" />
-                    <span>Submit Enquiry via WhatsApp</span>
+                    <span>{isSubmitting ? 'Opening WhatsApp...' : 'Submit Enquiry via WhatsApp'}</span>
                   </button>
                   <p className="text-[10px] text-center text-softgrey mt-2">
-                    Direct enquiry to {WHATSAPP_DISPLAY}. Fast, personal response from our Shiroli team.
+                    Direct enquiry to {WHATSAPP_DISPLAY} · Your contact info is never stored in public browser storage.
                   </p>
                 </div>
               </form>

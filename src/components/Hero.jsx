@@ -1,11 +1,39 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ArrowRight, Compass, MapPin, ChevronDown } from 'lucide-react';
+import gsap from 'gsap';
 import { Stone3DCanvas } from './Stone3DCanvas';
 import { MAP_DIRECTIONS_URL, MAP_COORDINATES } from './ContactSection';
 
 export const Hero = ({ onExploreCollections, onOpenVisualizer }) => {
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.hero-reveal',
+        { opacity: 0, y: 22 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+          stagger: 0.1,
+          ease: 'power2.out',
+          clearProps: 'transform'
+        }
+      );
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="home" className="relative min-h-screen flex flex-col justify-between pt-24 pb-12 overflow-hidden bg-ivory">
+    <section
+      id="home"
+      ref={heroRef}
+      className="relative min-h-screen flex flex-col justify-between pt-24 pb-12 overflow-hidden bg-ivory"
+    >
       {/* Background Architectural Ambient Tone */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
         <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-sand/30 blur-3xl"></div>
@@ -19,7 +47,7 @@ export const Hero = ({ onExploreCollections, onOpenVisualizer }) => {
           {/* Left Column: Editorial Typography & CTAs (7 cols) */}
           <div className="lg:col-span-7 flex flex-col justify-center">
             {/* Architectural Eyebrow Tag with Location */}
-            <div className="inline-flex items-center space-x-2.5 px-3.5 py-1.5 mb-6 bg-sand/60 backdrop-blur-sm border border-taupe/30 rounded-xs self-start">
+            <div className="hero-reveal inline-flex items-center space-x-2.5 px-3.5 py-1.5 mb-6 bg-sand/60 backdrop-blur-sm border border-taupe/30 rounded-xs self-start">
               <span className="w-1.5 h-1.5 rounded-full bg-taupe"></span>
               <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.22em] font-semibold text-charcoal">
                 Marble Market, Shiroli · Kolhapur
@@ -27,7 +55,7 @@ export const Hero = ({ onExploreCollections, onOpenVisualizer }) => {
             </div>
 
             {/* Main Editorial Headline */}
-            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-charcoal leading-[1.06] tracking-tight mb-6">
+            <h1 className="hero-reveal font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-charcoal leading-[1.06] tracking-tight mb-6">
               Nature Carved.{' '}
               <span className="italic block font-normal text-taupe-dark">
                 Spaces Defined.
@@ -35,12 +63,12 @@ export const Hero = ({ onExploreCollections, onOpenVisualizer }) => {
             </h1>
 
             {/* Supporting Text */}
-            <p className="text-base sm:text-lg md:text-xl text-charcoal/80 font-normal leading-relaxed max-w-xl mb-10 text-balance">
+            <p className="hero-reveal text-base sm:text-lg md:text-xl text-charcoal/80 font-normal leading-relaxed max-w-xl mb-10 text-balance">
               Discover premium granite, marble, tiles and quartz for timeless interiors.
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-12">
+            <div className="hero-reveal flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-12">
               <button
                 onClick={onExploreCollections}
                 className="px-8 py-4 bg-charcoal hover:bg-charcoal-deep text-ivory text-xs uppercase tracking-[0.2em] font-medium transition-all duration-300 flex items-center justify-center space-x-3 group shadow-subtle rounded-xs"
@@ -59,7 +87,7 @@ export const Hero = ({ onExploreCollections, onOpenVisualizer }) => {
             </div>
 
             {/* Architectural Material Summary Highlights */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-sand/80 max-w-2xl">
+            <div className="hero-reveal grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-sand/80 max-w-2xl">
               <div>
                 <p className="font-heading text-2xl text-charcoal font-semibold">18</p>
                 <p className="text-[10px] text-softgrey uppercase tracking-wider mt-0.5">Granite Varieties</p>

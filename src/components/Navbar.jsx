@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, MessageCircle, Sliders, Sparkles } from 'lucide-react';
 import { WHATSAPP_BASE_URL, WHATSAPP_DISPLAY } from '../utils/whatsapp';
 
-export const Navbar = ({ activeSection, onNavigate, onOpenAdmin }) => {
+export const Navbar = ({ activeSection, onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -86,17 +86,8 @@ export const Navbar = ({ activeSection, onNavigate, onOpenAdmin }) => {
               ))}
             </nav>
 
-            {/* Header Actions: Admin shortcut & WhatsApp CTA */}
+            {/* Header Actions: WhatsApp CTA */}
             <div className="hidden md:flex items-center space-x-3">
-              <button
-                onClick={onOpenAdmin}
-                title="Admin Dashboard (Prototype)"
-                className="px-2.5 py-1.5 text-[11px] tracking-wider uppercase text-softgrey hover:text-charcoal border border-sand hover:border-taupe/60 transition-colors flex items-center gap-1.5 rounded-sm"
-              >
-                <Sliders className="w-3 h-3" />
-                <span>Admin</span>
-              </button>
-
               <a
                 href={WHATSAPP_BASE_URL}
                 target="_blank"

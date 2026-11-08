@@ -17,12 +17,10 @@ import { WhyChooseKanha } from './components/WhyChooseKanha';
 import { StoneAnalysis } from './components/StoneAnalysis';
 import { MaterialGuide } from './components/MaterialGuide';
 import { ContactSection } from './components/ContactSection';
-import { AdminDashboard } from './components/AdminDashboard';
 import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 
 const STORAGE_KEY_PRODUCTS = 'kanha_products_v2';
-const STORAGE_KEY_ENQUIRIES = 'kanha_enquiries_v2';
 
 export function App() {
   // Load products with localStorage fallback
@@ -39,23 +37,11 @@ export function App() {
     return initialProducts;
   });
 
-  // Load customer enquiries from localStorage
-  const [enquiries, setEnquiries] = useState(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY_ENQUIRIES);
-      if (saved) return JSON.parse(saved);
-    } catch (e) {
-      console.warn('Could not load enquiries from localStorage', e);
-    }
-    return [];
-  });
-
   // Active section tracking for navbar
   const [activeSection, setActiveSection] = useState('home');
 
   // Modal states
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [adminOpen, setAdminOpen] = useState(false);
   const [visualizerConfig, setVisualizerConfig] = useState(null);
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('All');
 
@@ -115,27 +101,6 @@ export function App() {
     }
   };
 
-  // Add new customer enquiry from contact form
-  const handleSaveEnquiry = (newEnquiry) => {
-    const updated = [newEnquiry, ...enquiries];
-    setEnquiries(updated);
-    try {
-      localStorage.setItem(STORAGE_KEY_ENQUIRIES, JSON.stringify(updated));
-    } catch (e) {
-      console.error('Failed to save enquiry to localStorage', e);
-    }
-  };
-
-  // Clear enquiries
-  const handleClearEnquiries = () => {
-    if (window.confirm('Clear all logged customer enquiries?')) {
-      setEnquiries([]);
-      try {
-        localStorage.removeItem(STORAGE_KEY_ENQUIRIES);
-      } catch (e) {}
-    }
-  };
-
   // Smooth scroll handler
   const handleNavigate = (sectionId) => {
     setActiveSection(sectionId);
@@ -187,7 +152,6 @@ export function App() {
       <Navbar
         activeSection={activeSection}
         onNavigate={handleNavigate}
-        onOpenAdmin={() => setAdminOpen(true)}
       />
 
       {/* Main Architectural Journey Sections */}
@@ -250,9 +214,7 @@ export function App() {
         />
 
         {/* Section 9: Contact Page with Verified Map & WhatsApp */}
-        <ContactSection
-          onSaveEnquiry={handleSaveEnquiry}
-        />
+        <ContactSection />
       </main>
 
       {/* Section 10: Luxury Architectural Footer */}
@@ -273,17 +235,6 @@ export function App() {
           onVisualizeStone={handleVisualizeStone}
         />
       )}
-
-      {/* Admin Dashboard Protected Prototype */}
-      <AdminDashboard
-        isOpen={adminOpen}
-        onClose={() => setAdminOpen(false)}
-        products={products}
-        onUpdateProducts={handleUpdateProducts}
-        onResetProducts={handleResetProducts}
-        enquiries={enquiries}
-        onClearEnquiries={handleClearEnquiries}
-      />
     </div>
   );
 }
