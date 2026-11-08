@@ -1,0 +1,100 @@
+[
+  {
+    "id": "granite-vs-marble",
+    "title": "Granite vs. Marble: An Architectural Comparison",
+    "category": "Material Comparison",
+    "summary": "Understanding the fundamental differences in geological hardness, porosity, maintenance, and ideal applications between igneous granite and metamorphic marble.",
+    "readingTime": "4 min read",
+    "comparisonTable": [
+      { "aspect": "Geological Formation", "granite": "Igneous rock formed by cooling molten magma under extreme pressure", "marble": "Metamorphic rock formed when limestone recrystallizes under tectonic heat" },
+      { "aspect": "Hardness (Mohs Scale)", "granite": "6 to 7 (Extremely hard & scratch resistant)", "marble": "3 to 4 (Softer, susceptible to scratches from cutlery)" },
+      { "aspect": "Porosity & Acid Sensitivity", "granite": "Low porosity; highly resistant to lemon, vinegar and cooking oils", "marble": "Porous & calcium-rich; prone to acid etching if unsealed" },
+      { "aspect": "Visual Character", "granite": "Granular, crystalline speckled or flowing ribbon motion", "marble": "Soft, expressive veining, feathery clouds, luminous depth" },
+      { "aspect": "Best Applications", "granite": "Heavy-duty kitchen counters, stairs, exterior paving, vanity tops", "marble": "Living room flooring, master bathrooms, fireplace surrounds, feature walls" }
+    ],
+    "recommendation": "For active family kitchens with frequent heavy cooking, granite offers near-indestructible durability. For opulent living room flooring and luxury spa bathrooms, marble provides unmatched natural radiance and cool sophistication."
+  },
+  {
+    "id": "granite-vs-quartz",
+    "title": "Natural Granite vs. Engineered Quartz",
+    "category": "Material Comparison",
+    "summary": "Natural earth-hewn stone versus advanced engineered quartz crystals. How to choose based on stain resistance, heat tolerance, and aesthetic uniformity.",
+    "readingTime": "3 min read",
+    "comparisonTable": [
+      { "aspect": "Origin", "granite": "100% natural quarried stone slab", "quartz": "Engineered (approx. 90-93% natural quartz + polymer resins)" },
+      { "aspect": "Stain Resistance", "granite": "High when properly sealed once every 12-18 months", "quartz": "Exceptional; 100% non-porous with zero sealing required" },
+      { "aspect": "Heat Resistance", "granite": "Exceptional; can handle hot pans directly from stove", "quartz": "Moderate; hot pans can cause resin discoloration (trivet recommended)" },
+      { "aspect": "Pattern Uniformity", "granite": "Every slab is unique with natural variations & mineral marks", "quartz": "Predictable, controlled veining with uniform color matching" },
+      { "aspect": "Maintenance", "granite": "Periodic sealing; pH-neutral stone cleaner", "quartz": "Virtually zero maintenance; soapy water wash" }
+    ],
+    "recommendation": "Choose natural granite if you value 100% natural authenticity, unique mineral variation, and superior heat resistance. Choose engineered quartz if you want consistent veining (like Italian Calacatta) with zero periodic sealing."
+  },
+  {
+    "id": "tile-types",
+    "title": "Understanding Modern Tile Types",
+    "category": "Tile Guide",
+    "summary": "A guide through Vitrified, Glazed Vitrified (GVT), Full Body Vitrified, and Large-Format Porcelain Slabs for Kolhapur homes and commercial developments.",
+    "readingTime": "5 min read",
+    "comparisonTable": [
+      { "aspect": "Double Charged Vitrified", "granite": "Two-layer porcelain with 3-4mm design layer", "marble": "High abrasion resistance; ideal for heavy residential foot traffic" },
+      { "aspect": "Glazed Vitrified (GVT / PGVT)", "granite": "High-definition digital printed glaze on vitrified base", "marble": "Endless design variety (marble, wood, cement patterns) with polished or matte tops" },
+      { "aspect": "Full Body Vitrified", "granite": "Uniform color throughout the entire tile thickness", "marble": "Scratch proof and color permanent; ideal for commercial atriums and shops" },
+      { "aspect": "Large-Format Slabs (800x1600mm / 1200x2400mm)", "granite": "Continuous porcelain slabs with minimal joints", "marble": "Replaces natural marble slabs on feature walls and expansive floors" }
+    ],
+    "recommendation": "For living spaces, Large-Format GVT slabs reduce joint lines and simulate natural marble. For bathrooms and wet balconies, opt for matte or rustic slip-resistant surfaces."
+  },
+  {
+    "id": "surface-finishes",
+    "title": "Surface Finishes: Polished vs. Matte vs. Leathered",
+    "category": "Surface Treatments",
+    "summary": "How different surface treatments alter stone aesthetics, light reflection, slip resistance, and tactile sensation.",
+    "readingTime": "4 min read",
+    "comparisonTable": [
+      { "aspect": "Mirror Polished", "granite": "High-gloss reflective sheen buffed with fine diamond abrasives", "marble": "Enhances stone color depth; reflects light; best for indoor walls & low-slip floors" },
+      { "aspect": "Honed / Satin Matte", "granite": "Smooth, flat surface with zero glossy glare", "marble": "Velvety touch; hides micro-scratches; excellent for modern architectural sanctuaries" },
+      { "aspect": "Leathered / Antique", "granite": "Textured, tactile rippled finish that follows stone geology", "marble": "Hides fingerprints and water spots; warm organic touch for granite counters" },
+      { "aspect": "Flamed / Bush-Hammered", "granite": "High-heat thermal treatment leaving rough, crystalline texture", "marble": "Superior anti-slip traction for exterior ramps, pool surrounds and landscape steps" }
+    ],
+    "recommendation": "Polished finishes maximize light and luxury in living rooms. Leathered and honed finishes are trending for contemporary kitchen countertops because they hide fingerprints and offer a soft, tactile experience."
+  },
+  {
+    "id": "stone-maintenance",
+    "title": "Natural Stone Care & Longevity Guide",
+    "category": "Maintenance",
+    "summary": "Simple daily practices, cleaning dos and don'ts, and sealing schedules to preserve your stone for generations.",
+    "readingTime": "3 min read",
+    "comparisonTable": [
+      { "aspect": "Daily Cleaning", "granite": "Microfiber mop or warm water with mild pH-neutral soap", "marble": "Avoid acidic toilet cleaners, vinegar, lemon juice, or abrasive scouring pads" },
+      { "aspect": "Spill Management", "granite": "Blot spills immediately with a soft cloth rather than wiping across", "marble": "Pay special attention to turmeric, coffee, wine, and tomato purees on marble" },
+      { "aspect": "Sealing Schedule", "granite": "Apply penetrating solvent-based sealer once every 12 to 24 months", "marble": "Check with water drop test: if water darkens the stone in 5 mins, re-sealing is due" }
+    ],
+    "recommendation": "Never use harsh bathroom acid cleaners on natural marble or polished granite. A simple warm water wash with a pH-neutral cleaner keeps stone pristine for decades."
+  },
+  {
+    "id": "countertop-selection",
+    "title": "Selecting the Right Kitchen Countertop",
+    "category": "Buyer's Guide",
+    "summary": "Balancing cooking habits, color schemes, sink integration, and edge profiling for Indian kitchen requirements.",
+    "readingTime": "4 min read",
+    "comparisonTable": [
+      { "aspect": "Indian Cooking Demands", "granite": "High exposure to turmeric, tamarind, hot cookware and rolling pins (belan)", "marble": "Black Galaxy, Absolute Black, or Quartz are top recommendations" },
+      { "aspect": "Edge Profile", "granite": "Full Bullnose, Half Bullnose, Pencil Chamfer, or Mitered Waterfall", "marble": "Chamfer and full bullnose prevent chipping along sink cutouts" },
+      { "aspect": "Substrate Support", "granite": "Provide solid plywood carcass or stone support battens", "marble": "Prevents deflection under heavy granite slab weight (approx 45-55 kg/m²)" }
+    ],
+    "recommendation": "For heavy daily cooking, Absolute Black Granite or Black Galaxy Granite remains the undisputed champion. For light, modern Scandinavian open kitchens, Calacatta Quartz offers effortless luxury."
+  },
+  {
+    "id": "thickness-installation",
+    "title": "Stone Thickness & Installation Considerations",
+    "category": "Installation Insights",
+    "summary": "18mm vs. 20mm standards, leveling mortars, expansion joints, and edge reinforcement guidelines.",
+    "readingTime": "4 min read",
+    "comparisonTable": [
+      { "aspect": "Standard Sizing", "granite": "Granite: 18mm & 20mm calibrated slabs", "marble": "Marble: 18mm standard gangsaw cut slabs" },
+      { "aspect": "Quartz Sizing", "granite": "Quartz: 15mm & 20mm engineered panels", "marble": "Vitrified: 9mm to 12mm thickness" },
+      { "aspect": "Installation Mortar", "granite": "Polymer-modified stone adhesive or 1:4 cement-sand dry bed with slurry", "marble": "Ensures complete solid bedding without hollow pockets underneath" },
+      { "aspect": "Expansion Joints", "granite": "Provide 2mm to 3mm spacers on large tile floors", "marble": "Allows thermal movement and prevents tenting or cracking over time" }
+    ],
+    "recommendation": "Always inspect full slabs in person at our Shiroli showroom to verify color consistency and thickness calibration before dry-laying on site."
+  }
+]
