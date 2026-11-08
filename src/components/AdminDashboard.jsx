@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
 import { ENVIRONMENTS, PREVIEW_MANIFEST } from '../data/visualizerManifest';
+import { getAssetUrl } from '../utils/imageHelper';
 
 const ADMIN_PIN = 'KANHA2026';
 
@@ -569,7 +570,7 @@ export const AdminDashboard = ({
                             <td className="py-3 px-4">
                               <div className="flex items-center space-x-3">
                                 <img
-                                  src={p.image}
+                                  src={getAssetUrl(p.image)}
                                   alt={p.name}
                                   className="w-10 h-10 object-cover rounded-xs border border-sand shrink-0"
                                 />

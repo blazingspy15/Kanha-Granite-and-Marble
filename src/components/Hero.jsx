@@ -56,7 +56,7 @@ export const Hero = ({ onExploreCollections, onOpenVisualizer }) => {
               className="px-7 sm:px-8 py-3.5 sm:py-4 bg-warmwhite/90 hover:bg-warmwhite backdrop-blur-sm text-charcoal border border-sand hover:border-taupe text-xs uppercase tracking-[0.2em] font-medium transition-all duration-300 flex items-center justify-center space-x-2.5 rounded-xs shadow-xs"
             >
               <Compass className="w-4 h-4 text-taupe" />
-              <span>Interactive Visualizer Suite</span>
+              <span>Interactive Stone Visualizer</span>
             </button>
           </div>
 

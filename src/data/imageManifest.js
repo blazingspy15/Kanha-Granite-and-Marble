@@ -1,0 +1,202 @@
+/**
+ * Central Image Manifest for Kanha Granite & Marble.
+ * Maps every Product ID to its verified product photograph, close-up texture,
+ * verification status, and provenance notes.
+ */
+
+export const IMAGE_MANIFEST = {
+  // === GRANITE ===
+  'granite-black-galaxy': {
+    productId: 'granite-black-galaxy',
+    name: 'Black Galaxy Granite',
+    category: 'Granite',
+    productImage: 'images/products/granite/granite-black-galaxy.jpg',
+    textureImage: 'images/textures/granite/granite-black-galaxy-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Deep black granite with natural golden & bronze mineral flecks.',
+  },
+  'granite-absolute-black': {
+    productId: 'granite-absolute-black',
+    name: 'Absolute Black Granite',
+    category: 'Granite',
+    productImage: 'images/products/granite/granite-absolute-black.jpg',
+    textureImage: 'images/textures/granite/granite-absolute-black-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Uniform monolithic jet-black fine grain granite slab.',
+  },
+  'granite-tan-brown': {
+    productId: 'granite-tan-brown',
+    name: 'Tan Brown Granite',
+    category: 'Granite',
+    productImage: 'images/products/granite/granite-tan-brown.jpg',
+    textureImage: 'images/textures/granite/granite-tan-brown-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Rich brown and black granite with warm terracotta & burnt orange clusters.',
+  },
+  'granite-kashmir-white': {
+    productId: 'granite-kashmir-white',
+    name: 'Kashmir White Granite',
+    category: 'Granite',
+    productImage: 'images/products/granite/granite-kashmir-white.jpg',
+    textureImage: 'images/textures/granite/granite-kashmir-white-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Light silver-white granite canvas with delicate garnet micro-crystals.',
+  },
+  'granite-river-white': {
+    productId: 'granite-river-white',
+    name: 'River White Granite',
+    category: 'Granite',
+    productImage: 'images/products/granite/granite-river-white.jpg',
+    textureImage: 'images/textures/granite/granite-river-white-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Flowing ribbons of smoky grey and soft lavender across an ivory stone surface.',
+  },
+  'granite-alaska-white': {
+    productId: 'granite-alaska-white',
+    name: 'Alaska White Granite',
+    category: 'Granite',
+    productImage: 'images/products/granite/granite-alaska-white.jpg',
+    textureImage: 'images/textures/granite/granite-alaska-white-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'High-contrast crystalline white granite with bold dark onyx mineral clusters.',
+  },
+
+  // === MARBLE ===
+  'marble-indian-statuario': {
+    productId: 'marble-indian-statuario',
+    name: 'Indian Statuario Marble',
+    category: 'Marble',
+    productImage: 'images/products/marble/marble-indian-statuario.jpg',
+    textureImage: 'images/textures/marble/marble-indian-statuario-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Luminous pure white crystalline ground with dramatic grey ribbons.',
+  },
+  'marble-italian-carrara': {
+    productId: 'marble-italian-carrara',
+    name: 'Italian Carrara Marble',
+    category: 'Marble',
+    productImage: 'images/products/marble/marble-italian-carrara.jpg',
+    textureImage: 'images/textures/marble/marble-italian-carrara-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Classic European white marble with soft smoky feathered grey mist veining.',
+  },
+  'marble-makrana-white': {
+    productId: 'marble-makrana-white',
+    name: 'Makrana White Marble',
+    category: 'Marble',
+    productImage: 'images/products/marble/marble-makrana-white.jpg',
+    textureImage: 'images/textures/marble/marble-makrana-white-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Historic pure white calcitic marble with brilliant crystalline radiance.',
+  },
+  'marble-botticino': {
+    productId: 'marble-botticino',
+    name: 'Botticino Marble',
+    category: 'Marble',
+    productImage: 'images/products/marble/marble-botticino.jpg',
+    textureImage: 'images/textures/marble/marble-botticino-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Warm Italian creamy beige marble with subtle golden-hazel veins.',
+  },
+
+  // === TILES ===
+  'tiles-glossy-vitrified': {
+    productId: 'tiles-glossy-vitrified',
+    name: 'Glossy Vitrified Tiles',
+    category: 'Tiles',
+    productImage: 'images/products/tiles/tiles-glossy-vitrified.jpg',
+    textureImage: 'images/textures/tiles/tiles-glossy-vitrified-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Ultra-glossy nano-polished vitrified tile with mirror light reflection.',
+  },
+  'tiles-matte-finish': {
+    productId: 'tiles-matte-finish',
+    name: 'Matte Architectural Tiles',
+    category: 'Tiles',
+    productImage: 'images/products/tiles/tiles-matte-finish.jpg',
+    textureImage: 'images/textures/tiles/tiles-matte-finish-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Non-glare tactile ceramic surface with velvety anti-slip micro-texture.',
+  },
+  'tiles-full-body-vitrified': {
+    productId: 'tiles-full-body-vitrified',
+    name: 'Vitrified Slabs & Tiles',
+    category: 'Tiles',
+    productImage: 'images/products/tiles/tiles-full-body-vitrified.jpg',
+    textureImage: 'images/textures/tiles/tiles-full-body-vitrified-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Heavy-duty homogeneous vitrified slab with uniform through-body composition.',
+  },
+  'tiles-large-format': {
+    productId: 'tiles-large-format',
+    name: 'Large-Format Slabs',
+    category: 'Tiles',
+    productImage: 'images/products/tiles/tiles-large-format.jpg',
+    textureImage: 'images/textures/tiles/tiles-large-format-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Expansive 1200x2400mm porcelain slab with continuous architectural veining.',
+  },
+
+  // === QUARTZ ===
+  'quartz-pure-white': {
+    productId: 'quartz-pure-white',
+    name: 'White Quartz',
+    category: 'Quartz',
+    productImage: 'images/products/quartz/quartz-pure-white.jpg',
+    textureImage: 'images/textures/quartz/quartz-pure-white-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Architectural pure white engineered quartz with zero porosity and micro-crystal sparkle.',
+  },
+  'quartz-calacatta-style': {
+    productId: 'quartz-calacatta-style',
+    name: 'Calacatta-Style Quartz',
+    category: 'Quartz',
+    productImage: 'images/products/quartz/quartz-calacatta-style.jpg',
+    textureImage: 'images/textures/quartz/quartz-calacatta-style-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Warm milk-white engineered quartz with dramatic sweeping grey Calacatta veins.',
+  },
+  'quartz-grey': {
+    productId: 'quartz-grey',
+    name: 'Grey Quartz',
+    category: 'Quartz',
+    productImage: 'images/products/quartz/quartz-grey.jpg',
+    textureImage: 'images/textures/quartz/quartz-grey-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Smoked dove grey concrete-look engineered quartz with subtle industrial tone.',
+  },
+  'quartz-beige': {
+    productId: 'quartz-beige',
+    name: 'Beige Quartz',
+    category: 'Quartz',
+    productImage: 'images/products/quartz/quartz-beige.jpg',
+    textureImage: 'images/textures/quartz/quartz-beige-texture.jpg',
+    imageStatus: 'Verified Material Photograph',
+    isIllustrative: false,
+    visualDescription: 'Tranquil sand-dune beige quartz with warm feldspar micro-specks.',
+  },
+};
+
+/**
+ * Helper to get images for a product ID, with graceful fallback.
+ */
+export function getProductImageMeta(productId) {
+  return IMAGE_MANIFEST[productId] || null;
+}

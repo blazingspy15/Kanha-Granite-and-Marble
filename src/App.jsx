@@ -53,6 +53,37 @@ export function App() {
   // Modal states
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [adminOpen, setAdminOpen] = useState(false);
+  const [visualizerConfig, setVisualizerConfig] = useState(null);
+
+  // Direct connection from catalogue to visualizer (Section 7)
+  const handleVisualizeStone = (product, application) => {
+    let targetRoom = 'kitchen';
+    if (product.category === 'Marble') targetRoom = 'living-room';
+    if (product.category === 'Tiles') targetRoom = 'bathroom';
+    if (application) {
+      const appLower = application.toLowerCase();
+      if (appLower.includes('step') || appLower.includes('riser')) {
+        targetRoom = 'staircase';
+      } else if (appLower.includes('table')) {
+        targetRoom = 'dining-area';
+      } else if (appLower.includes('vanity') || appLower.includes('bath')) {
+        targetRoom = 'bathroom';
+      } else if (appLower.includes('living') || appLower.includes('feature wall')) {
+        targetRoom = 'living-room';
+      } else if (appLower.includes('counter') || appLower.includes('island')) {
+        targetRoom = 'kitchen';
+      }
+    }
+
+    setVisualizerConfig({
+      stoneId: product.id,
+      category: product.category,
+      roomId: targetRoom,
+      application: application || product.applications?.[0] || 'Countertop',
+    });
+
+    handleNavigate('visualizer');
+  };
 
   // Update localStorage when products change
   const handleUpdateProducts = (updated) => {
@@ -160,11 +191,13 @@ export function App() {
         <Collections
           products={products}
           onSelectProduct={(product) => setSelectedProduct(product)}
+          onVisualizeStone={handleVisualizeStone}
         />
 
         {/* 5. Standout Photo-Based Interior Stone Visualizer */}
         <StoneVisualizer
           products={products}
+          preselectedConfig={visualizerConfig}
         />
 
         {/* 6. Application Gallery */}
@@ -204,6 +237,7 @@ export function App() {
           allProducts={products}
           onClose={() => setSelectedProduct(null)}
           onSelectRelated={(related) => setSelectedProduct(related)}
+          onVisualizeStone={handleVisualizeStone}
         />
       )}
 

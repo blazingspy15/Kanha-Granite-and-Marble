@@ -1,14 +1,15 @@
 /**
  * Central Asset Manifest for Kanha Granite and Marble Interactive Visualizer.
- * Designed to easily register new room camera angles, stone materials, and application previews.
+ * Provides authentic, high-resolution before-and-after photographic interior pairs
+ * with verified local paths.
  */
 
 export const ENVIRONMENTS = [
   {
     id: 'kitchen',
     name: 'Kitchen',
-    description: 'Culinary spaces with high heat, stain, and durability requirements.',
-    baseImage: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1800&q=85',
+    description: 'High heat, moisture and stain resistance requirements on countertops and islands.',
+    baseImage: 'images/rooms/kitchen/base.jpg',
     applications: ['Countertop', 'Island', 'Backsplash', 'Flooring'],
     applicationSuitability: {
       'Countertop': ['Granite', 'Quartz', 'Marble'],
@@ -20,8 +21,8 @@ export const ENVIRONMENTS = [
   {
     id: 'living-room',
     name: 'Living Room',
-    description: 'Expansive main halls, reception areas, and luxury media walls.',
-    baseImage: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85',
+    description: 'Expansive main halls, reception areas, and luxury architectural feature walls.',
+    baseImage: 'images/rooms/living-room/base.jpg',
     applications: ['Flooring', 'Feature Wall'],
     applicationSuitability: {
       'Flooring': ['Marble', 'Granite', 'Tiles'],
@@ -31,8 +32,8 @@ export const ENVIRONMENTS = [
   {
     id: 'bathroom',
     name: 'Bathroom',
-    description: 'Private wellness suites, moisture-sealed vanity counters, and wet walls.',
-    baseImage: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1800&q=85',
+    description: 'Private wellness suites, moisture-sealed vanity counters, and wet-wall cladding.',
+    baseImage: 'images/rooms/bathroom/base.jpg',
     applications: ['Vanity', 'Wall', 'Flooring'],
     applicationSuitability: {
       'Vanity': ['Granite', 'Quartz', 'Marble'],
@@ -43,8 +44,8 @@ export const ENVIRONMENTS = [
   {
     id: 'staircase',
     name: 'Staircase',
-    description: 'Architectural vertical transitions with heavy foot traffic requirements.',
-    baseImage: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1800&q=85',
+    description: 'Architectural vertical transitions with heavy foot traffic and anti-slip needs.',
+    baseImage: 'images/rooms/staircase/base.jpg',
     applications: ['Steps', 'Risers'],
     applicationSuitability: {
       'Steps': ['Granite', 'Marble'],
@@ -54,8 +55,8 @@ export const ENVIRONMENTS = [
   {
     id: 'bedroom',
     name: 'Bedroom',
-    description: 'Restful master sanctuaries, ambient flooring, and headboard accent walls.',
-    baseImage: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1800&q=85',
+    description: 'Restful master sanctuaries, ambient floor expanse, and headboard accent walls.',
+    baseImage: 'images/rooms/bedroom/base.jpg',
     applications: ['Flooring', 'Feature Wall'],
     applicationSuitability: {
       'Flooring': ['Marble', 'Tiles', 'Granite'],
@@ -66,7 +67,7 @@ export const ENVIRONMENTS = [
     id: 'dining-area',
     name: 'Dining Area',
     description: 'Entertaining spaces anchored around bespoke stone dining tables and flooring.',
-    baseImage: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1800&q=85',
+    baseImage: 'images/rooms/dining-area/base.jpg',
     applications: ['Tabletop', 'Flooring'],
     applicationSuitability: {
       'Tabletop': ['Marble', 'Quartz', 'Granite'],
@@ -78,212 +79,99 @@ export const ENVIRONMENTS = [
 export const CATEGORIES = ['Granite', 'Marble', 'Tiles', 'Quartz'];
 
 /**
- * High-quality photographic interior previews mapped by:
+ * Authentic photographic interior previews mapped strictly by:
  * `${roomId}__${stoneId}__${application.toLowerCase().replace(/\s+/g, '-')}`
- * or fallback by `${roomId}__${stoneId}`
+ *
+ * Any combination NOT listed below will cleanly trigger "Preview Coming Soon",
+ * ensuring we never display an unrelated or fake image.
  */
 export const PREVIEW_MANIFEST = {
   // === KITCHEN ===
   'kitchen__granite-black-galaxy__countertop': {
-    afterImage: 'https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Black Galaxy Granite with polished mirror sheen on heavy-traffic perimeter countertops.',
+    afterImage: 'images/visualizer/kitchen/kitchen-granite-black-galaxy-countertop.jpg',
+    caption: 'Black Galaxy Granite with polished mirror sheen on perimeter countertops.',
     finish: 'Mirror Polished 20mm',
   },
   'kitchen__granite-black-galaxy__island': {
-    afterImage: 'https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=1800&q=85',
+    afterImage: 'images/visualizer/kitchen/kitchen-granite-black-galaxy-island.jpg',
     caption: 'Monolithic Black Galaxy Granite island anchor reflecting overhead pendant lighting.',
     finish: 'Mirror Polished 20mm',
   },
-  'kitchen__granite-absolute-black__countertop': {
-    afterImage: 'https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Pure jet-black monolithic granite surface with zero visible veining and high heat tolerance.',
-    finish: 'Honed Matte 20mm',
-  },
-  'kitchen__granite-absolute-black__island': {
-    afterImage: 'https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Seamless Absolute Black granite kitchen island with integrated under-mount sink cutout.',
-    finish: 'Leathered Antique 20mm',
-  },
-  'kitchen__granite-kashmir-white__countertop': {
-    afterImage: 'https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Kashmir White natural granite brightening the workspace with delicate burgundy micro-garnets.',
-    finish: 'Mirror Polished 18mm',
-  },
   'kitchen__quartz-calacatta-style__island': {
-    afterImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Calacatta-Style Quartz waterfall island featuring broad grey veining down mitered edges.',
-    finish: 'Mirror Polished 20mm',
-  },
-  'kitchen__quartz-calacatta-style__countertop': {
-    afterImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Calacatta-Style Quartz perimeter counter providing non-porous stain resistance against oils & sauces.',
-    finish: 'Mirror Polished 20mm',
-  },
-  'kitchen__quartz-calacatta-style__backsplash': {
-    afterImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Full-height continuous Calacatta Quartz slab backsplash eliminating grout cleaning behind hobs.',
-    finish: 'Polished 15mm Slab',
+    afterImage: 'images/visualizer/kitchen/kitchen-quartz-calacatta-island.jpg',
+    caption: 'Calacatta-Style Quartz waterfall island featuring dramatic grey veining.',
+    finish: 'Polished 20mm Suede Edge',
   },
   'kitchen__quartz-pure-white__countertop': {
-    afterImage: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Ultra-clean pure white engineered quartz surface for contemporary Scandinavian minimalism.',
-    finish: 'Suede Finish 20mm',
-  },
-  'kitchen__quartz-pure-white__island': {
-    afterImage: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Luminous White Quartz waterfall island emphasizing clean lines and pristine light reflectance.',
+    afterImage: 'images/visualizer/kitchen/kitchen-quartz-white-countertop.jpg',
+    caption: 'Pristine White Quartz countertops delivering zero-porosity stain resistance.',
     finish: 'Ultra Polished 20mm',
-  },
-  'kitchen__marble-indian-statuario__island': {
-    afterImage: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Authentic Indian Statuario Marble island slab displaying expressive natural grey river veins.',
-    finish: 'Satin Honed 18mm',
-  },
-  'kitchen__marble-indian-statuario__countertop': {
-    afterImage: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Sealed natural Statuario marble countertops adding aristocratic warmth to bespoke cabinetry.',
-    finish: 'Mirror Polished 18mm',
-  },
-  'kitchen__tiles-large-format__flooring': {
-    afterImage: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Large-format porcelain slabs on kitchen floor minimizing grout joints for seamless cleaning.',
-    finish: 'Silk Matte Vitrified',
   },
 
   // === LIVING ROOM ===
   'living-room__marble-indian-statuario__flooring': {
-    afterImage: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Expansive Indian Statuario Marble flooring with continuous natural veining and cool tactile luxury.',
-    finish: 'Mirror Polished 18mm',
-  },
-  'living-room__marble-indian-statuario__feature-wall': {
-    afterImage: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Dramatic bookmatched Statuario marble slab feature wall creating a permanent architectural focal point.',
-    finish: 'Bookmatch Polished 18mm',
+    afterImage: 'images/visualizer/living-room/living-marble-statuario-flooring.jpg',
+    caption: 'Expansive Indian Statuario Marble flooring with continuous feathery grey veins.',
+    finish: 'Bookmatch Mirror Polished',
   },
   'living-room__marble-botticino__flooring': {
-    afterImage: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Warm Botticino beige marble flooring casting a golden, welcoming glow across the main hall.',
-    finish: 'Brushed Velvet 18mm',
-  },
-  'living-room__granite-alaska-white__feature-wall': {
-    afterImage: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1800&q=85',
-    caption: 'High-contrast Alaska White Granite accent wall with crystalline patches and dark mineral bursts.',
-    finish: 'Leathered Touch 20mm',
-  },
-  'living-room__tiles-large-format__flooring': {
-    afterImage: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Continuous 1200x2400mm vitrified porcelain slabs delivering marble grandeur with zero maintenance.',
-    finish: 'Nano Polished GVT',
+    afterImage: 'images/visualizer/living-room/living-marble-botticino-flooring.jpg',
+    caption: 'Warm Mediterranean Botticino beige marble adding gentle, golden-toned serenity.',
+    finish: 'Silky Honed Satin',
   },
 
   // === BATHROOM ===
   'bathroom__marble-italian-carrara__vanity': {
-    afterImage: 'https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Italian Carrara Marble floating vanity top with delicate feathered grey mist and undermount basin.',
-    finish: 'Honed Satin 18mm',
+    afterImage: 'images/visualizer/bathroom/bathroom-marble-carrara-vanity.jpg',
+    caption: 'Understated Italian Carrara Marble vanity counter with soft smoky grey veining.',
+    finish: 'Honed Matte 18mm',
   },
-  'bathroom__marble-italian-carrara__wall': {
-    afterImage: 'https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Full-height Carrara marble wall cladding creating a serene private spa atmosphere.',
-    finish: 'Honed 18mm Slabs',
-  },
-  'bathroom__granite-absolute-black__vanity': {
-    afterImage: 'https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Monochromatic Absolute Black Granite floating vanity offering total moisture resistance.',
-    finish: 'Honed Matte 20mm',
-  },
-  'bathroom__quartz-calacatta-style__vanity': {
-    afterImage: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Calacatta Quartz vanity top combining opulent marble veining with soap-and-lotion stain immunity.',
-    finish: 'Polished 18mm',
-  },
-  'bathroom__tiles-matte-finish__flooring': {
-    afterImage: 'https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Anti-slip tactile matte floor tiles engineered for wet bathroom safety and warm barefoot comfort.',
-    finish: 'R10 Anti-Slip Matte',
+  'bathroom__tiles-large-format__wall': {
+    afterImage: 'images/visualizer/bathroom/bathroom-tiles-large-format-wall.jpg',
+    caption: 'Seamless large-format porcelain slabs providing minimal grout lines in the wet enclosure.',
+    finish: 'Continuous Bookmatch Polished',
   },
 
   // === STAIRCASE ===
   'staircase__granite-black-galaxy__steps': {
-    afterImage: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Heavy-duty Black Galaxy Granite steps with bullnosed edges and diamond-grooved anti-skid treads.',
-    finish: 'Full Bullnose + Grooved 20mm',
-  },
-  'staircase__granite-black-galaxy__risers': {
-    afterImage: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Polished Black Galaxy risers shimmering with golden crystalline sparkles under step riser LED lights.',
-    finish: 'Mirror Polished 18mm',
-  },
-  'staircase__marble-indian-statuario__steps': {
-    afterImage: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Sculptural white marble staircase treads turning functional circulation into a centerpiece of grandeur.',
-    finish: 'Polished Bullnose 20mm',
-  },
-  'staircase__granite-tan-brown__steps': {
-    afterImage: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Resilient Tan Brown Granite treads built for decades of high-abrasion family foot traffic.',
-    finish: 'Chiseled Bullnose 20mm',
+    afterImage: 'images/visualizer/staircase/staircase-granite-black-galaxy-steps.jpg',
+    caption: 'High-durability Black Galaxy Granite step treads with anti-slip nosing details.',
+    finish: 'Honed Anti-Slip Tread',
   },
 
   // === BEDROOM ===
   'bedroom__marble-botticino__flooring': {
-    afterImage: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Creamy Botticino marble bedroom flooring creating an oasis of quiet Mediterranean warmth.',
-    finish: 'Honed Matte 18mm',
-  },
-  'bedroom__granite-kashmir-white__flooring': {
-    afterImage: 'https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Airy Kashmir White flooring reflecting morning sunlight and complementing natural wood furnishings.',
-    finish: 'Mirror Polished 18mm',
-  },
-  'bedroom__marble-indian-statuario__feature-wall': {
-    afterImage: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Opulent Statuario marble bedhead wall bringing boutique 5-star hotel luxury into the master suite.',
-    finish: 'Silk Satin 18mm',
+    afterImage: 'images/visualizer/bedroom/bedroom-marble-botticino-flooring.jpg',
+    caption: 'Warm Botticino Marble bedroom flooring creating a soft, luminous sanctuary.',
+    finish: 'Brushed Antique Polish',
   },
 
   // === DINING AREA ===
   'dining-area__marble-indian-statuario__tabletop': {
-    afterImage: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Bespoke Statuario natural marble dining tabletop with beveled edges and continuous organic veining.',
-    finish: 'Beveled Mirror Polished 20mm',
-  },
-  'dining-area__quartz-calacatta-style__tabletop': {
-    afterImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Calacatta Quartz dining surface impervious to spilled wine, turmeric, citrus, or hot dinnerware.',
-    finish: 'Chamfered Edge 20mm',
-  },
-  'dining-area__marble-botticino__flooring': {
-    afterImage: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85',
-    caption: 'Warm Botticino stone floor under the dining suite ensuring effortless sweep and timeless elegance.',
-    finish: 'Polished 18mm',
+    afterImage: 'images/visualizer/dining-area/dining-marble-statuario-tabletop.jpg',
+    caption: 'Bespoke Statuario Marble dining tabletop with bevelled architectural edge.',
+    finish: 'Mirror Polished 20mm',
   },
 };
 
 /**
- * Helper to lookup a preview from the manifest
+ * Resolver function: Looks up prepared photo pair in manifest.
+ * Returns null if not explicitly prepared, ensuring "Preview Coming Soon" is displayed.
  */
-export const getVisualizerPreview = (roomId, stoneId, application) => {
+export function getVisualizerPreview(roomId, stoneId, application) {
   if (!roomId || !stoneId) return null;
   const appSlug = (application || '').toLowerCase().replace(/\s+/g, '-');
   const exactKey = `${roomId}__${stoneId}__${appSlug}`;
+
   if (PREVIEW_MANIFEST[exactKey]) {
-    return {
-      ...PREVIEW_MANIFEST[exactKey],
-      isExactMatch: true,
-    };
+    return PREVIEW_MANIFEST[exactKey];
   }
 
-  // Check if any preview for this room and stone exists
-  const fallbackPrefix = `${roomId}__${stoneId}`;
-  const matchingKey = Object.keys(PREVIEW_MANIFEST).find((k) => k.startsWith(fallbackPrefix));
-  if (matchingKey) {
-    return {
-      ...PREVIEW_MANIFEST[matchingKey],
-      isExactMatch: false,
-    };
+  // Check fallback by roomId and stoneId
+  const fallbackKey = `${roomId}__${stoneId}`;
+  if (PREVIEW_MANIFEST[fallbackKey]) {
+    return PREVIEW_MANIFEST[fallbackKey];
   }
 
   return null;
-};
+}

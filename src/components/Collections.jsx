@@ -1,8 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Filter, MessageCircle, Eye, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Search, Filter, MessageCircle, Eye, ArrowUpRight, Sparkles, Compass, CheckCircle2 } from 'lucide-react';
 import { buildWhatsAppUrl, createProductEnquiryMessage } from '../utils/whatsapp';
+import { getAssetUrl } from '../utils/imageHelper';
 
-export const Collections = ({ products, onSelectProduct }) => {
+export const Collections = ({ products = [], onSelectProduct, onVisualizeStone }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedFinish, setSelectedFinish] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -40,7 +41,7 @@ export const Collections = ({ products, onSelectProduct }) => {
       .sort((a, b) => {
         if (sortBy === 'featured') return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
         if (sortBy === 'popularity') return (b.popularity || 0) - (a.popularity || 0);
-        if (sortBy === 'name-asc') return a.name.localeCompare(b.name);
+        if (sortBy === 'name-asc') return a.name.localeCompare(a.name);
         if (sortBy === 'name-desc') return b.name.localeCompare(a.name);
         return 0;
       });
@@ -60,13 +61,19 @@ export const Collections = ({ products, onSelectProduct }) => {
               Curated Collections.
             </h2>
             <p className="text-sm sm:text-base text-charcoal/75 mt-3 leading-relaxed">
-              Explore our core families of natural granite, Italian & Indian marble, designer tiles, and engineered quartz surfaces.
+              Explore authentic natural granite, Italian & Indian marble, architectural tiles, and engineered quartz surfaces. Each variety is displayed with real close-up material photography.
             </p>
           </div>
 
-          {/* Demo Catalogue Disclaimer Pill */}
-          <div className="mt-4 md:mt-0 p-3 bg-ivory border border-sand rounded-sm text-xs text-softgrey max-w-sm">
-            <span className="font-semibold text-charcoal">Illustrative Demo Catalogue:</span> Slab selections shown are representative demo products. Inquire on WhatsApp for live quarry lot arrivals and verified dimensions.
+          {/* Verification Badge */}
+          <div className="mt-4 md:mt-0 p-3 bg-ivory border border-sand rounded-sm text-xs text-charcoal/80 max-w-sm flex items-start space-x-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <div>
+              <span className="font-semibold block text-charcoal">Verified Material Photography:</span>
+              <span className="text-[11px] text-softgrey">
+                Product cards show actual stone slab appearance. Inquire on WhatsApp for current lot arrivals and slab dimensions.
+              </span>
+            </div>
           </div>
         </div>
 
@@ -101,7 +108,7 @@ export const Collections = ({ products, onSelectProduct }) => {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search stone name, tone or room..."
+                placeholder="Search stone name, tone or application..."
                 className="w-full pl-9 pr-3 py-2 text-xs bg-warmwhite border border-sand focus:border-taupe focus:outline-none rounded-xs placeholder:text-softgrey/70 text-charcoal"
               />
             </div>
@@ -180,7 +187,7 @@ export const Collections = ({ products, onSelectProduct }) => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProducts.map((product) => {
-              const defaultApp = product.applications?.[0] || 'Kitchen Countertop';
+              const defaultApp = product.applications?.[0] || 'General Application';
               const whatsappUrl = buildWhatsAppUrl(
                 createProductEnquiryMessage({
                   productName: product.name,
@@ -195,16 +202,20 @@ export const Collections = ({ products, onSelectProduct }) => {
                   className="group bg-ivory/50 hover:bg-warmwhite border border-sand hover:border-taupe/60 transition-all duration-300 flex flex-col justify-between rounded-sm overflow-hidden shadow-subtle hover:shadow-luxury"
                 >
                   <div>
-                    {/* Image Container */}
+                    {/* Image Container with Real Slab Photograph */}
                     <div
                       onClick={() => onSelectProduct(product)}
                       className="relative aspect-[4/3] overflow-hidden bg-sand/20 cursor-pointer"
                     >
                       <img
-                        src={product.image}
-                        alt={`${product.name} ${product.category}`}
+                        src={getAssetUrl(product.image)}
+                        alt={`${product.name} ${product.category} slab photograph`}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-[0.98]"
                         loading="lazy"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = getAssetUrl('images/textures/' + product.category.toLowerCase() + '/' + product.id + '-texture.jpg');
+                        }}
                       />
 
                       {/* Top Badges */}
@@ -212,18 +223,22 @@ export const Collections = ({ products, onSelectProduct }) => {
                         <span className="bg-charcoal/85 backdrop-blur-sm text-sand text-[10px] tracking-widest uppercase px-2 py-0.5 rounded-xs font-medium">
                           {product.category}
                         </span>
-                        {product.isDemo && (
+                        {product.isIllustrative ? (
+                          <span className="bg-amber-100 text-amber-900 border border-amber-300 text-[9px] tracking-wider uppercase px-1.5 py-0.5 rounded-xs font-semibold">
+                            Illustrative Sample
+                          </span>
+                        ) : (
                           <span className="bg-warmwhite/90 backdrop-blur-sm text-charcoal border border-sand text-[9px] tracking-wider uppercase px-1.5 py-0.5 rounded-xs font-semibold">
-                            Demo Sample
+                            Verified Material
                           </span>
                         )}
                       </div>
 
-                      {/* Quick Inspect Button on Hover */}
+                      {/* Hover Overlay */}
                       <div className="absolute inset-0 bg-charcoal/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <span className="px-3 py-1.5 bg-warmwhite/95 text-charcoal text-[11px] uppercase tracking-wider font-semibold rounded-xs shadow-sm flex items-center gap-1.5">
                           <Eye className="w-3.5 h-3.5 text-taupe" />
-                          <span>View Slab Details</span>
+                          <span>View Full Slab Details</span>
                         </span>
                       </div>
                     </div>
@@ -248,6 +263,7 @@ export const Collections = ({ products, onSelectProduct }) => {
                           onClick={() => onSelectProduct(product)}
                           className="p-1.5 text-softgrey hover:text-charcoal hover:bg-sand/30 rounded-xs transition-colors"
                           title="View Full Specifications"
+                          aria-label="View Full Specifications"
                         >
                           <ArrowUpRight className="w-4 h-4" />
                         </button>
@@ -257,11 +273,11 @@ export const Collections = ({ products, onSelectProduct }) => {
                         {product.shortDescription || product.description}
                       </p>
 
-                      {/* Thickness & Finishes summary */}
+                      {/* Finishes & Applications preview */}
                       <div className="pt-3 border-t border-sand/60 space-y-2">
                         {product.thickness && (
                           <div className="text-[11px] text-charcoal/80 flex items-center justify-between">
-                            <span className="text-softgrey">Thickness:</span>
+                            <span className="text-softgrey">Standard Dimension:</span>
                             <span className="font-medium">{product.thickness}</span>
                           </div>
                         )}
@@ -285,23 +301,35 @@ export const Collections = ({ products, onSelectProduct }) => {
                     </div>
                   </div>
 
-                  {/* Card Action Buttons */}
-                  <div className="px-5 pb-5 pt-2 grid grid-cols-2 gap-2">
+                  {/* Card Action Buttons (Section 7 Connection) */}
+                  <div className="px-5 pb-5 pt-2 grid grid-cols-3 gap-2">
+                    {/* Button 1: Visualize in Room */}
                     <button
-                      onClick={() => onSelectProduct(product)}
-                      className="w-full py-2.5 px-2 bg-warmwhite hover:bg-sand/30 border border-sand text-charcoal text-[11px] uppercase tracking-wider font-semibold rounded-xs transition-colors text-center"
+                      onClick={() => onVisualizeStone && onVisualizeStone(product, defaultApp)}
+                      className="py-2 px-1 bg-ivory hover:bg-sand/40 border border-sand text-charcoal text-[10px] uppercase tracking-wider font-semibold rounded-xs transition-colors flex items-center justify-center space-x-1"
+                      title="Test in Space Visualizer"
                     >
-                      Specifications
+                      <Compass className="w-3 h-3 text-taupe shrink-0" />
+                      <span className="truncate">Visualize</span>
                     </button>
 
+                    {/* Button 2: Details Modal */}
+                    <button
+                      onClick={() => onSelectProduct(product)}
+                      className="py-2 px-1 bg-warmwhite hover:bg-sand/30 border border-sand text-charcoal text-[10px] uppercase tracking-wider font-semibold rounded-xs transition-colors text-center truncate"
+                    >
+                      Specs
+                    </button>
+
+                    {/* Button 3: WhatsApp Enquiry */}
                     <a
                       href={whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-2.5 px-2 bg-charcoal hover:bg-charcoal-deep text-ivory text-[11px] uppercase tracking-wider font-medium rounded-xs transition-colors flex items-center justify-center space-x-1.5 group/btn"
+                      className="py-2 px-1 bg-charcoal hover:bg-charcoal-deep text-ivory text-[10px] uppercase tracking-wider font-medium rounded-xs transition-colors flex items-center justify-center space-x-1 group/btn"
                     >
-                      <MessageCircle className="w-3.5 h-3.5 text-sand transition-transform group-hover/btn:scale-110" />
-                      <span>Enquire</span>
+                      <MessageCircle className="w-3 h-3 text-sand transition-transform group-hover/btn:scale-110 shrink-0" />
+                      <span className="truncate">Enquire</span>
                     </a>
                   </div>
                 </div>

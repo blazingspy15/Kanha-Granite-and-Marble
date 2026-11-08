@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { X, MessageCircle, ZoomIn, Check, Layers, Maximize2, Shield, ArrowRight } from 'lucide-react';
+import { X, MessageCircle, ZoomIn, Check, Compass, CheckCircle2, AlertTriangle, ArrowRight } from 'lucide-react';
 import { buildWhatsAppUrl, createProductEnquiryMessage, WHATSAPP_DISPLAY } from '../utils/whatsapp';
+import { getAssetUrl } from '../utils/imageHelper';
 
-export const ProductModal = ({ product, allProducts, onClose, onSelectRelated }) => {
+export const ProductModal = ({
+  product,
+  allProducts,
+  onClose,
+  onSelectRelated,
+  onVisualizeStone
+}) => {
   const [selectedApplication, setSelectedApplication] = useState('');
   const [isZoomed, setIsZoomed] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [activeImageTab, setActiveImageTab] = useState('slab'); // 'slab' | 'texture'
 
   useEffect(() => {
     if (product?.applications?.length > 0) {
       setSelectedApplication(product.applications[0]);
     }
+    setActiveImageTab('slab');
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
     };
@@ -40,6 +49,8 @@ export const ProductModal = ({ product, allProducts, onClose, onSelectRelated })
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 3);
 
+  const displayedImage = activeImageTab === 'slab' ? product.image : product.textureImage;
+
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-charcoal/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 md:p-6 animate-fadeIn">
       {/* Background click to dismiss */}
@@ -56,23 +67,24 @@ export const ProductModal = ({ product, allProducts, onClose, onSelectRelated })
         </button>
 
         <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Product Image Section with Zoom */}
+          {/* Product Image Section with Interactive Zoom & Texture Switcher */}
           <div className="relative bg-sand/20 flex flex-col justify-between border-b md:border-b-0 md:border-r border-sand">
+            {/* Image display */}
             <div
-              className="relative aspect-square sm:aspect-[4/3] md:aspect-auto md:h-full min-h-[320px] overflow-hidden cursor-crosshair group"
+              className="relative aspect-square sm:aspect-[4/3] md:aspect-auto md:h-full min-h-[340px] overflow-hidden cursor-crosshair group"
               onMouseEnter={() => setIsZoomed(true)}
               onMouseLeave={() => setIsZoomed(false)}
               onMouseMove={handleMouseMove}
             >
               <img
-                src={product.image}
-                alt={product.name}
+                src={getAssetUrl(displayedImage)}
+                alt={`${product.name} ${product.category} ${activeImageTab}`}
                 className="w-full h-full object-cover transition-transform duration-300"
                 style={
                   isZoomed
                     ? {
                         transformOrigin: `${mousePos.x}% ${mousePos.y}%`,
-                        transform: 'scale(2.2)',
+                        transform: 'scale(2.3)',
                       }
                     : { transform: 'scale(1)' }
                 }
@@ -81,15 +93,46 @@ export const ProductModal = ({ product, allProducts, onClose, onSelectRelated })
               {/* Zoom hint overlay */}
               <div className="absolute bottom-3 left-3 bg-charcoal/80 backdrop-blur-sm text-sand text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-xs flex items-center gap-1.5 pointer-events-none">
                 <ZoomIn className="w-3 h-3 text-taupe-light" />
-                <span>Hover to zoom texture</span>
+                <span>Hover to magnify grain</span>
               </div>
 
-              {/* Demo product badge */}
-              {product.isDemo && (
-                <div className="absolute top-3 left-3 bg-sand/90 backdrop-blur-sm text-charcoal border border-taupe/30 text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-xs font-semibold">
-                  Demo Product · Illustrative
-                </div>
-              )}
+              {/* Material verification badge */}
+              <div className="absolute top-3 left-3">
+                {product.isIllustrative ? (
+                  <span className="bg-amber-100 text-amber-900 border border-amber-300 text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-xs font-semibold">
+                    Illustrative Sample
+                  </span>
+                ) : (
+                  <span className="bg-warmwhite/95 text-charcoal border border-sand text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-xs font-semibold flex items-center space-x-1 shadow-xs">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                    <span>Verified Slab Photography</span>
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Slab vs Texture Switcher Tabs */}
+            <div className="p-2.5 bg-ivory border-t border-sand flex items-center space-x-2">
+              <button
+                onClick={() => setActiveImageTab('slab')}
+                className={`flex-1 py-1.5 text-[11px] uppercase tracking-wider rounded-xs font-medium transition-colors ${
+                  activeImageTab === 'slab'
+                    ? 'bg-charcoal text-ivory'
+                    : 'bg-warmwhite hover:bg-sand/30 text-charcoal border border-sand'
+                }`}
+              >
+                Full Slab View
+              </button>
+              <button
+                onClick={() => setActiveImageTab('texture')}
+                className={`flex-1 py-1.5 text-[11px] uppercase tracking-wider rounded-xs font-medium transition-colors ${
+                  activeImageTab === 'texture'
+                    ? 'bg-charcoal text-ivory'
+                    : 'bg-warmwhite hover:bg-sand/30 text-charcoal border border-sand'
+                }`}
+              >
+                Macro Texture View
+              </button>
             </div>
           </div>
 
@@ -135,11 +178,11 @@ export const ProductModal = ({ product, allProducts, onClose, onSelectRelated })
                   </div>
                 </div>
 
-                {/* Verified Thickness */}
+                {/* Standard Dimension */}
                 {product.thickness && (
                   <div>
                     <h4 className="text-[11px] uppercase tracking-widest text-charcoal font-semibold mb-1">
-                      Thickness Information
+                      Standard Dimension & Thickness
                     </h4>
                     <p className="text-xs text-charcoal/80 font-medium">
                       {product.thickness}
@@ -147,7 +190,7 @@ export const ProductModal = ({ product, allProducts, onClose, onSelectRelated })
                   </div>
                 )}
 
-                {/* Suitable Applications (Selectable for contextual WhatsApp) */}
+                {/* Selectable Intended Application */}
                 <div>
                   <h4 className="text-[11px] uppercase tracking-widest text-charcoal font-semibold mb-2">
                     Select Your Intended Application
@@ -176,8 +219,24 @@ export const ProductModal = ({ product, allProducts, onClose, onSelectRelated })
               </div>
             </div>
 
-            {/* Bottom Actions */}
+            {/* Bottom Actions: Visualize & WhatsApp Enquiry */}
             <div className="pt-6 border-t border-sand space-y-3">
+              {/* Visualize Button (Direct Section 7 Connection) */}
+              <button
+                type="button"
+                onClick={() => {
+                  if (onVisualizeStone) {
+                    onVisualizeStone(product, selectedApplication || product.applications?.[0]);
+                  }
+                  onClose();
+                }}
+                className="w-full flex items-center justify-center space-x-2.5 py-3 bg-ivory hover:bg-sand/40 border border-sand text-charcoal text-xs uppercase tracking-[0.2em] font-semibold transition-all duration-200 rounded-sm shadow-xs"
+              >
+                <Compass className="w-4 h-4 text-taupe" />
+                <span>Visualize {product.name} in 3D Space</span>
+              </button>
+
+              {/* WhatsApp Enquiry Button */}
               <a
                 href={whatsappUrl}
                 target="_blank"
@@ -207,7 +266,7 @@ export const ProductModal = ({ product, allProducts, onClose, onSelectRelated })
                       >
                         <div className="aspect-[4/3] overflow-hidden bg-sand/30 mb-1 rounded-xs">
                           <img
-                            src={rel.image}
+                            src={getAssetUrl(rel.image)}
                             alt={rel.name}
                             className="w-full h-full object-cover group-hover/rel:scale-105 transition-transform"
                           />
