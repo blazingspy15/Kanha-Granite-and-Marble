@@ -26,7 +26,8 @@ export const MAP_COORDINATES = {
 
 export const MAP_EMBED_URL = 'https://www.google.com/maps?q=16.7349763,74.2913544&output=embed';
 export const MAP_DIRECTIONS_URL = 'https://www.google.com/maps/dir/?api=1&destination=16.7349763%2C74.2913544';
-export const MAP_SHORT_URL = 'https://maps.app.goo.gl/zh32xyJtMq6KzudU8';
+export const MAP_SHORT_URL = 'https://maps.app.goo.gl/kMwAcZoxJS654vDDA';
+export const MAP_PLACE_URL = 'https://www.google.com/maps/place/Kanha+granite+and+marble/@16.7349763,74.2913544,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc101007618e2ab:0x5f2af658c47de5f6!8m2!3d16.7349763!4d74.2913544!16s%2Fg%2F11xrzj0qtn';
 
 export const ContactSection = ({ onSaveEnquiry }) => {
   const [formData, setFormData] = useState({

@@ -176,7 +176,7 @@ export const Footer = ({ onNavigate }) => {
                   </a>
 
                   <a
-                    href="https://maps.app.goo.gl/zh32xyJtMq6KzudU8"
+                    href="https://maps.app.goo.gl/kMwAcZoxJS654vDDA"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center space-x-1.5 text-softgrey hover:text-warmwhite transition-colors text-[11px]"
